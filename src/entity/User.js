@@ -20,7 +20,8 @@ var UserSchema = new mongoose_1.Schema({
     mobile: {
         type: String
     },
-    posts: [{ type: mongoose_1.Types.ObjectId, ref: 'Post' }]
+    posts: [{ type: mongoose_1.Types.ObjectId, ref: 'Post' }],
+    token: String
 });
 var UserModel = mongoose_1.model('User', UserSchema);
 exports.default = UserModel;

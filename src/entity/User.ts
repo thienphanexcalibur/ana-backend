@@ -7,7 +7,8 @@ interface IUser extends Document {
 	fullname: string,
 	email?: string,
 	mobile?: string,
-	posts?: string[]
+	posts?: string[],
+	token: string
 }
 const UserSchema : Schema = new Schema({
 			username: {
@@ -27,7 +28,8 @@ const UserSchema : Schema = new Schema({
 			mobile: {
 				type: String
 			},
-			posts: [{type: Types.ObjectId, ref: 'Post'}]
+			posts: [{type: Types.ObjectId, ref: 'Post'}],
+			token: String
 });
 const UserModel:Model<IUser> = model<IUser>('User', UserSchema);
 export default UserModel;

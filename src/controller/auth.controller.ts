@@ -1,5 +1,8 @@
 import {Request, Response} from 'express';
-
-export default function (req: Request, res: Response, next: any) {
-		res.send(req.body.username + req.body.password);
+import {promisify} from 'util';
+import {_hash} from '@utils';
+export default async function (req: Request, res: Response, next: any) {
+	const {username, password} = req.body;
+	const hashedPassword: string = await _hash(password);
+	console.log(hashedPassword);
 }

@@ -7,8 +7,12 @@
     "experimentalDecorators": true,
 		"baseUrl": ".",
 		"paths": {
-				"routes": ["./src/routes"],
-				"controller/*": ["./src/controller/*"]
+				"root": ["./"],
+				"@": ["./src"],
+				"@routes": ["./src/routes"],
+				"@controller/*": ["./src/controller/*"],
+				"@entity/*": ["./src/entity/*"],
+				"@utils": ["./src/utils"]
 			}
 	},
 	"exlude": [
