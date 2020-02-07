@@ -17,14 +17,33 @@ function _hash(s, salt) {
     return util_1.promisify(bcrypt_1.hash)(s, salt);
 }
 exports._hash = _hash;
-function _hashCompare(s1, s2) {
-    return bcrypt_1.compare(s1, s2);
+/**
+ * Compare hashes
+ * @param {String} s1
+ * @param {String} s2
+ * @return Promise<boolean>
+ */
+function _hashCompare(s1, hash) {
+    return util_1.promisify(bcrypt_1.compare)(s1, hash);
 }
 exports._hashCompare = _hashCompare;
-function generateToken(payload, secretKey) {
-    return jsonwebtoken_1.sign(payload, secretKey);
+/**
+ * Generate auth token
+ * @param {*} payload
+ * @param {String} secretKey
+ * @return string
+ */
+function generateToken(payload) {
+    return jsonwebtoken_1.sign(payload, secret);
 }
 exports.generateToken = generateToken;
 function verifyToken(token) {
+    try {
+        var decoded = jsonwebtoken_1.verify(token, secret);
+        return decoded;
+    }
+    catch (e) {
+        return false;
+    }
 }
 exports.verifyToken = verifyToken;

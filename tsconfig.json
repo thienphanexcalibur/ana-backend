@@ -11,7 +11,7 @@
 				"@": ["./src"],
 				"@routes": ["./src/routes"],
 				"@controller/*": ["./src/controller/*"],
-				"@entity/*": ["./src/entity/*"],
+				"@entity": ["./src/entity"],
 				"@utils": ["./src/utils"]
 			}
 	},

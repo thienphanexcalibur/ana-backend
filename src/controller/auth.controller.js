@@ -37,20 +37,67 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var _utils_1 = require("@utils");
-function default_1(req, res, next) {
-    return __awaiter(this, void 0, void 0, function () {
-        var _a, username, password, hashedPassword;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    _a = req.body, username = _a.username, password = _a.password;
-                    return [4 /*yield*/, _utils_1._hash(password)];
-                case 1:
-                    hashedPassword = _b.sent();
-                    console.log(hashedPassword);
-                    return [2 /*return*/];
-            }
+var _entity_1 = require("@entity");
+var AuthController = /** @class */ (function () {
+    function AuthController() {
+    }
+    AuthController.prototype.signup = function (req, res, next) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, username, password, email, fullname, mobile, token, encryptedPwd;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = req.body, username = _a.username, password = _a.password, email = _a.email, fullname = _a.fullname, mobile = _a.mobile;
+                        token = _utils_1.generateToken({
+                            username: username,
+                            password: password
+                        });
+                        return [4 /*yield*/, _utils_1._hash(password)];
+                    case 1:
+                        encryptedPwd = _b.sent();
+                        new _entity_1.UserModel({ username: username, password: encryptedPwd, email: email, fullname: fullname, mobile: mobile, token: token }).save().then(function (user) {
+                            res.send('success');
+                        }).catch(function (e) {
+                            res.send('failure');
+                        });
+                        return [2 /*return*/];
+                }
+            });
         });
-    });
-}
-exports.default = default_1;
+    };
+    AuthController.prototype.auth = function (req, res, next) {
+        var _a = req.body, token = _a.token, username = _a.username, password = _a.password;
+        if (token) {
+            _entity_1.UserModel.findOne({ token: token }, function (err, user) {
+                var userInfo = _utils_1.verifyToken(token);
+                if (userInfo) {
+                    res.send(userInfo);
+                }
+                else {
+                    res.send('failure');
+                }
+            });
+        }
+        if (username && password) {
+            _entity_1.UserModel.findOne({ username: username }, function (err, user) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var result;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                if (!user) return [3 /*break*/, 2];
+                                return [4 /*yield*/, _utils_1._hashCompare(password, user.password)];
+                            case 1:
+                                result = _a.sent();
+                                res.send(result ? 'success' : 'failure');
+                                _a.label = 2;
+                            case 2: return [2 /*return*/];
+                        }
+                    });
+                });
+            });
+        }
+    };
+    return AuthController;
+}());
+exports.default = AuthController;

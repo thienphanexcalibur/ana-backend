@@ -1,6 +1,6 @@
 import {Schema, Document, model, Model, Types } from 'mongoose';
-import('./User');
-import('./Comment');
+import {UserModel} from './User';
+import {CommentModel} from './Comment';
 interface IPost extends Document {
 		title: string,
 		content: string,
@@ -25,5 +25,4 @@ const PostSchema : Schema = new Schema({
 		byUser: {type: Types.ObjectId, ref: 'User'},
 		comments: [{type: Types.ObjectId, ref: 'Comment'}]
 });
-const PostModel:Model<IPost> = model<IPost>('Post', PostSchema);
-export default PostModel;
+export const PostModel:Model<IPost> = model<IPost>('Post', PostSchema);

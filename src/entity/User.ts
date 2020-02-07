@@ -1,10 +1,9 @@
 import {Schema, model, Model, Types, Document } from 'mongoose';
-import('./Post');
+import {PostModel} from './Post';
 interface IUser extends Document {
-
 	username: string,
 	password: string,
-	fullname: string,
+	fullname?: string,
 	email?: string,
 	mobile?: string,
 	posts?: string[],
@@ -28,8 +27,7 @@ const UserSchema : Schema = new Schema({
 			mobile: {
 				type: String
 			},
-			posts: [{type: Types.ObjectId, ref: 'Post'}],
+			posts: [{type: Types.ObjectId, ref: PostModel}],
 			token: String
 });
-const UserModel:Model<IUser> = model<IUser>('User', UserSchema);
-export default UserModel;
+export const UserModel:Model<IUser> = model<IUser>('User', UserSchema);

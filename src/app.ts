@@ -1,14 +1,17 @@
-import('module-alias/register');
 import * as express from "express";
 import {Request, Response} from "express";
+import {Model} from 'mongoose';
 import * as bodyParser from  "body-parser";
 import * as mongoose from 'mongoose';
+import {verifyToken} from '@utils';
 import routes from '@routes';
+import AuthController from '@controller/auth.controller';
+
 const path = require('path');
 
 const app = express();
 const port:number = 3000;
-const dbUri = 'mongodb://localhost:27017/reddit-clone'
+const dbUri = 'mongodb://localhost:27017/reddit-clone';
 mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 
@@ -16,7 +19,11 @@ app.use(bodyParser.json());
 app.use(routes);
 app.use(function(req, res, next) {
 		console.log(`${Date.now()}: ${req.method} ${req.url}`);
+		next();
 });
+
+//app.get('*', new AuthController().auth);
+
 // start express server
 app.listen(port, () => {
 		db.once('open', () => {

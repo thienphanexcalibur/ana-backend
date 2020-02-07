@@ -1,5 +1,5 @@
-import CommentModel from './Comment';
-import UserModel from './User';
+export {CommentModel} from './Comment';
+export {UserModel} from './User';
+export {PostModel} from './Post';
 
-export const Comment = CommentModel;
-export const User = UserModel;
+

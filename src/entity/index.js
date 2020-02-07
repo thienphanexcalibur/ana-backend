@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Comment_1 = require("./Comment");
+exports.CommentModel = Comment_1.CommentModel;
 var User_1 = require("./User");
-exports.Comment = Comment_1.default;
-exports.User = User_1.default;
+exports.UserModel = User_1.UserModel;
+var Post_1 = require("./Post");
+exports.PostModel = Post_1.PostModel;

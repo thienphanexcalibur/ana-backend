@@ -5,7 +5,7 @@ var User_1 = require("./User");
 var Post_1 = require("./Post");
 var CommentSchema = new mongoose_1.Schema({
     comment: String,
-    byUser: { type: mongoose_1.Types.ObjectId, refer: User_1.default },
+    byUser: { type: mongoose_1.Types.ObjectId, refer: User_1.UserModel },
     created_at: {
         type: Date,
         default: Date.now
@@ -22,7 +22,6 @@ var CommentSchema = new mongoose_1.Schema({
         type: Number,
         default: 0
     },
-    post: { type: mongoose_1.Types.ObjectId, refer: Post_1.default }
+    post: { type: mongoose_1.Types.ObjectId, refer: Post_1.PostModel }
 });
-var CommentModel = mongoose_1.model('Comment', CommentSchema);
-exports.default = CommentModel;
+exports.CommentModel = mongoose_1.model('Comment', CommentSchema);

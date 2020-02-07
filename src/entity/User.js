@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = require("mongoose");
-Promise.resolve().then(function () { return require('./Post'); });
+var Post_1 = require("./Post");
 var UserSchema = new mongoose_1.Schema({
     username: {
         type: String,
@@ -20,8 +20,7 @@ var UserSchema = new mongoose_1.Schema({
     mobile: {
         type: String
     },
-    posts: [{ type: mongoose_1.Types.ObjectId, ref: 'Post' }],
+    posts: [{ type: mongoose_1.Types.ObjectId, ref: Post_1.PostModel }],
     token: String
 });
-var UserModel = mongoose_1.model('User', UserSchema);
-exports.default = UserModel;
+exports.UserModel = mongoose_1.model('User', UserSchema);

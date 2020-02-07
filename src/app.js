@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-Promise.resolve().then(function () { return require('module-alias/register'); });
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
@@ -15,7 +14,9 @@ app.use(bodyParser.json());
 app.use(_routes_1.default);
 app.use(function (req, res, next) {
     console.log(Date.now() + ": " + req.method + " " + req.url);
+    next();
 });
+//app.get('*', new AuthController().auth);
 // start express server
 app.listen(port, function () {
     db.once('open', function () {
