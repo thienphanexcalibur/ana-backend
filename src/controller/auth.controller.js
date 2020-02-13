@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -37,13 +50,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var _utils_1 = require("@utils");
-var _entity_1 = require("@entity");
-var AuthController = /** @class */ (function () {
-    function AuthController() {
+var app_controller_1 = require("@controller/app.controller");
+var _utils_2 = require("@utils");
+var AuthController = /** @class */ (function (_super) {
+    __extends(AuthController, _super);
+    function AuthController(model) {
+        var _this = _super.call(this, model) || this;
+        _this.auth = _this.auth.bind(_this);
+        _this.signup = _this.signup.bind(_this);
+        return _this;
     }
     AuthController.prototype.signup = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, username, password, email, fullname, mobile, token, encryptedPwd;
+            var _a, username, password, email, fullname, mobile, token, encryptedPwd, user, e_1;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -55,49 +74,59 @@ var AuthController = /** @class */ (function () {
                         return [4 /*yield*/, _utils_1._hash(password)];
                     case 1:
                         encryptedPwd = _b.sent();
-                        new _entity_1.UserModel({ username: username, password: encryptedPwd, email: email, fullname: fullname, mobile: mobile, token: token }).save().then(function (user) {
-                            res.send('success');
-                        }).catch(function (e) {
-                            res.send('failure');
-                        });
+                        _b.label = 2;
+                    case 2:
+                        _b.trys.push([2, 4, , 5]);
+                        return [4 /*yield*/, this.add({ username: username,
+                                password: encryptedPwd,
+                                email: email,
+                                fullname: fullname,
+                                mobile: mobile,
+                                token: token
+                            })];
+                    case 3:
+                        user = _b.sent();
+                        res.send('success');
+                        return [3 /*break*/, 5];
+                    case 4:
+                        e_1 = _b.sent();
+                        _utils_2.logger.log('error', e_1);
+                        res.send('failure');
                         return [2 /*return*/];
+                    case 5: return [2 /*return*/];
                 }
             });
         });
     };
     AuthController.prototype.auth = function (req, res, next) {
-        var _a = req.body, token = _a.token, username = _a.username, password = _a.password;
-        if (token) {
-            _entity_1.UserModel.findOne({ token: token }, function (err, user) {
-                var userInfo = _utils_1.verifyToken(token);
-                if (userInfo) {
-                    res.send(userInfo);
-                }
-                else {
-                    res.send('failure');
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, token, username, password, user, userInfo, user, result;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = req.body, token = _a.token, username = _a.username, password = _a.password;
+                        if (!token) return [3 /*break*/, 2];
+                        return [4 /*yield*/, this.find({ token: token })];
+                    case 1:
+                        user = _b.sent();
+                        userInfo = _utils_1.verifyToken(token);
+                        res.send(userInfo ? 'success' : 'failure');
+                        _b.label = 2;
+                    case 2:
+                        if (!(username && password)) return [3 /*break*/, 5];
+                        return [4 /*yield*/, this.find({ username: username, password: password })];
+                    case 3:
+                        user = _b.sent();
+                        return [4 /*yield*/, _utils_1._hashCompare(password, user.password)];
+                    case 4:
+                        result = _b.sent();
+                        res.send(result ? 'success' : 'failure');
+                        _b.label = 5;
+                    case 5: return [2 /*return*/];
                 }
             });
-        }
-        if (username && password) {
-            _entity_1.UserModel.findOne({ username: username }, function (err, user) {
-                return __awaiter(this, void 0, void 0, function () {
-                    var result;
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0:
-                                if (!user) return [3 /*break*/, 2];
-                                return [4 /*yield*/, _utils_1._hashCompare(password, user.password)];
-                            case 1:
-                                result = _a.sent();
-                                res.send(result ? 'success' : 'failure');
-                                _a.label = 2;
-                            case 2: return [2 /*return*/];
-                        }
-                    });
-                });
-            });
-        }
+        });
     };
     return AuthController;
-}());
-exports.default = AuthController;
+}(app_controller_1.default));
+exports.AuthController = AuthController;

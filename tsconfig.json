@@ -5,13 +5,17 @@
     "module": "commonjs",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+		"allowSyntheticDefaultImports": false,
+		"moduleResolution": "node",
 		"baseUrl": ".",
 		"paths": {
 				"root": ["./"],
 				"@": ["./src"],
 				"@routes": ["./src/routes"],
+				"@controller": ["./src/controller"],
 				"@controller/*": ["./src/controller/*"],
 				"@entity": ["./src/entity"],
+				"@utils/*": ["./src/utils/*"],
 				"@utils": ["./src/utils"]
 			}
 	},

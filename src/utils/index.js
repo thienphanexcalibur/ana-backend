@@ -47,3 +47,5 @@ function verifyToken(token) {
     }
 }
 exports.verifyToken = verifyToken;
+var log_1 = require("./log");
+exports.logger = log_1.logger;

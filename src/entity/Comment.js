@@ -5,7 +5,10 @@ var User_1 = require("./User");
 var Post_1 = require("./Post");
 var CommentSchema = new mongoose_1.Schema({
     comment: String,
-    byUser: { type: mongoose_1.Types.ObjectId, refer: User_1.UserModel },
+    byUser: {
+        type: mongoose_1.Types.ObjectId,
+        refer: User_1.UserModel
+    },
     created_at: {
         type: Date,
         default: Date.now

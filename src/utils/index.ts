@@ -1,7 +1,6 @@
 import {hash as bcryptHash, compare as bcryptCompare} from 'bcrypt';
 import {promisify} from 'util';
 import {sign, verify} from 'jsonwebtoken';
-
 const fs = require('fs');
 const path = require('path');
 
@@ -52,3 +51,5 @@ export function verifyToken<T>(token: string) : T {
 		return false as any;
 	}
 }
+
+export {logger} from './log';

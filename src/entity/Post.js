@@ -13,7 +13,8 @@ var PostSchema = new mongoose_1.Schema({
         default: Date.now
     },
     updated_date: {
-        type: Date
+        type: Date,
+        default: Date.now
     },
     byUser: { type: mongoose_1.Types.ObjectId, ref: 'User' },
     comments: [{ type: mongoose_1.Types.ObjectId, ref: 'Comment' }]
