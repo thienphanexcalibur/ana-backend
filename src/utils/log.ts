@@ -1,20 +1,22 @@
 import * as winston from 'winston';
-const { combine, timestamp, label, prettyPrint, colorize } = winston.format;
 import 'winston-mongodb';
 
-const {DB_HOST, DB_PORT, DB_ROOT} = process.env;
+const { combine, timestamp, label, prettyPrint, colorize } = winston.format;
+const {DB_HOST, DB_PORT, DB_ROOT, mode} = process.env;
+const isProd = mode === 'PRODUCTION';
 
 const transports: any = winston.transports;
 export const logger = winston.createLogger({
   defaultMeta: { service: 'user-service' },
   transports: [
-		!process.env.DEV ? new transports.MongoDB({
+		isProd ? new transports.MongoDB({
 			level: 'error',
 			db: `mongodb://${DB_HOST}:${DB_PORT}/${DB_ROOT}`,
 			options: {useNewUrlParser: true, useUnifiedTopology: true},
 			includeIds: true
-		}) : new winston.transports.Console({
+		}) : new winston.transports.File({
 				level: 'error',
+				filename: 'error.log',
 				format: combine(
 					colorize(),
 					timestamp(),

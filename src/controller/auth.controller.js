@@ -66,6 +66,7 @@ var AuthController = /** @class */ (function (_super) {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
+                        _b.trys.push([0, 3, , 4]);
                         _a = req.body, username = _a.username, password = _a.password, email = _a.email, fullname = _a.fullname, mobile = _a.mobile;
                         token = _utils_1.generateToken({
                             username: username,
@@ -74,9 +75,6 @@ var AuthController = /** @class */ (function (_super) {
                         return [4 /*yield*/, _utils_1._hash(password)];
                     case 1:
                         encryptedPwd = _b.sent();
-                        _b.label = 2;
-                    case 2:
-                        _b.trys.push([2, 4, , 5]);
                         return [4 /*yield*/, this.add({ username: username,
                                 password: encryptedPwd,
                                 email: email,
@@ -84,45 +82,60 @@ var AuthController = /** @class */ (function (_super) {
                                 mobile: mobile,
                                 token: token
                             })];
-                    case 3:
+                    case 2:
                         user = _b.sent();
                         res.send('success');
-                        return [3 /*break*/, 5];
-                    case 4:
+                        return [3 /*break*/, 4];
+                    case 3:
                         e_1 = _b.sent();
-                        _utils_2.logger.log('error', e_1);
                         res.send('failure');
-                        return [2 /*return*/];
-                    case 5: return [2 /*return*/];
+                        _utils_2.logger.log('error', e_1);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
     AuthController.prototype.auth = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, token, username, password, user, userInfo, user, result;
+            var _a, token, username, password, user, userInfo, result, e_2;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
+                        _b.trys.push([0, 6, , 7]);
                         _a = req.body, token = _a.token, username = _a.username, password = _a.password;
+                        user = null;
                         if (!token) return [3 /*break*/, 2];
                         return [4 /*yield*/, this.find({ token: token })];
                     case 1:
                         user = _b.sent();
                         userInfo = _utils_1.verifyToken(token);
-                        res.send(userInfo ? 'success' : 'failure');
+                        if (!user || !userInfo) {
+                            res.sendStatus(404);
+                            return [2 /*return*/];
+                        }
                         _b.label = 2;
                     case 2:
                         if (!(username && password)) return [3 /*break*/, 5];
-                        return [4 /*yield*/, this.find({ username: username, password: password })];
+                        return [4 /*yield*/, this.find({ username: username })];
                     case 3:
                         user = _b.sent();
                         return [4 /*yield*/, _utils_1._hashCompare(password, user.password)];
                     case 4:
                         result = _b.sent();
-                        res.send(result ? 'success' : 'failure');
+                        if (!user || !result) {
+                            res.sendStatus(404);
+                            return [2 /*return*/];
+                        }
                         _b.label = 5;
-                    case 5: return [2 /*return*/];
+                    case 5:
+                        res.send(user);
+                        return [3 /*break*/, 7];
+                    case 6:
+                        e_2 = _b.sent();
+                        _utils_2.logger.log('error', e_2);
+                        return [3 /*break*/, 7];
+                    case 7: return [2 /*return*/];
                 }
             });
         });

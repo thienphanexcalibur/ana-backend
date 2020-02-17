@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -36,54 +49,143 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var _entity_1 = require("@entity");
-var PostController = /** @class */ (function () {
-    function PostController() {
-        this.add = this.add.bind(this);
-        this.edit = this.edit.bind(this);
-        this.delete = this.delete.bind(this);
+var app_controller_1 = require("@controller/app.controller");
+var _utils_1 = require("@utils");
+var PostController = /** @class */ (function (_super) {
+    __extends(PostController, _super);
+    function PostController(model) {
+        var _this = _super.call(this, model) || this;
+        _this.addPost = _this.addPost.bind(_this);
+        _this.editPost = _this.editPost.bind(_this);
+        _this.deletePost = _this.deletePost.bind(_this);
+        _this.getPost = _this.getPost.bind(_this);
+        _this.addComment = _this.addComment.bind(_this);
+        return _this;
     }
-    PostController.prototype.add = function (req, res, next) {
+    PostController.prototype.addComment = function (post, commentId) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, title, content, byUser;
+            var foundPost;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.find(post)];
+                    case 1:
+                        foundPost = _a.sent();
+                        foundPost.comments.push(commentId);
+                        return [2 /*return*/, foundPost.save()];
+                }
+            });
+        });
+    };
+    PostController.prototype.addPost = function (req, res, next) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, title, content, byUser, newPost, e_1;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         _a = req.body, title = _a.title, content = _a.content, byUser = _a.byUser;
-                        return [4 /*yield*/, new _entity_1.PostModel({ title: title, content: content, byUser: byUser })];
+                        _b.label = 1;
                     case 1:
-                        _b.sent();
-                        return [2 /*return*/];
+                        _b.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.add({ title: title, content: content, byUser: byUser })];
+                    case 2:
+                        newPost = _b.sent();
+                        res.send(newPost);
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_1 = _b.sent();
+                        res.send('failure');
+                        _utils_1.logger.log('error', e_1);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    PostController.prototype.edit = function (req, res, next) {
+    PostController.prototype.editPost = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            var id, _a, title, content;
+            var id, _a, title, content, byUser, modifiedPost, e_2;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
+                        _b.trys.push([0, 2, , 3]);
                         id = req.params.id;
-                        _a = req.body, title = _a.title, content = _a.content;
-                        return [4 /*yield*/, _entity_1.PostModel.findByIdAndUpdate(id, { title: title, content: content }).exec()];
+                        _a = req.body, title = _a.title, content = _a.content, byUser = _a.byUser;
+                        return [4 /*yield*/, this.modify(id, { title: title, content: content, updated_date: Date.now(), byUser: byUser })];
                     case 1:
-                        _b.sent();
-                        return [2 /*return*/];
+                        modifiedPost = _b.sent();
+                        if (modifiedPost) {
+                            res.send(modifiedPost);
+                        }
+                        return [3 /*break*/, 3];
+                    case 2:
+                        e_2 = _b.sent();
+                        res.send('failure');
+                        _utils_1.logger.log('error', e_2);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    PostController.prototype.delete = function (req, res, next) {
+    PostController.prototype.deletePost = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            var id;
+            var id, deletedPost, e_3;
             return __generator(this, function (_a) {
-                id = req.params.id;
-                _entity_1.PostModel.findByIdAndDelete(id);
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        id = req.params.id;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.remove(id)];
+                    case 2:
+                        deletedPost = _a.sent();
+                        if (deletedPost) {
+                            res.send('success');
+                        }
+                        else {
+                            res.sendStatus(404);
+                        }
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_3 = _a.sent();
+                        res.send('failure');
+                        _utils_1.logger.log('error', e_3);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PostController.prototype.getPost = function (req, res, next) {
+        return __awaiter(this, void 0, void 0, function () {
+            var id, post, e_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        id = req.params.id;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.find(id)];
+                    case 2:
+                        post = _a.sent();
+                        if (post) {
+                            res.send(post);
+                        }
+                        else {
+                            res.sendStatus(404);
+                        }
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_4 = _a.sent();
+                        _utils_1.logger.log(e_4);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
             });
         });
     };
     return PostController;
-}());
+}(app_controller_1.default));
 exports.PostController = PostController;

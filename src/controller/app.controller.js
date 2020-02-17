@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var mongoose_1 = require("mongoose");
 var AppController = /** @class */ (function () {
     function AppController(model) {
         this.model = model;
@@ -17,7 +18,7 @@ var AppController = /** @class */ (function () {
         return this.model.findByIdAndRemove(_id).exec();
     };
     AppController.prototype.find = function (pre) {
-        if (typeof pre === 'string') {
+        if (mongoose_1.Types.ObjectId.isValid(pre)) {
             return this.model.findById(pre).exec();
         }
         return this.model.findOne(pre).exec();

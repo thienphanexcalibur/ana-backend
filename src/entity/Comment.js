@@ -9,14 +9,6 @@ var CommentSchema = new mongoose_1.Schema({
         type: mongoose_1.Types.ObjectId,
         refer: User_1.UserModel
     },
-    created_at: {
-        type: Date,
-        default: Date.now
-    },
-    updated_at: {
-        type: Date,
-        default: Date.now
-    },
     liked: {
         type: Number,
         default: 1
@@ -26,5 +18,5 @@ var CommentSchema = new mongoose_1.Schema({
         default: 0
     },
     post: { type: mongoose_1.Types.ObjectId, refer: Post_1.PostModel }
-});
+}, { timestamps: true });
 exports.CommentModel = mongoose_1.model('Comment', CommentSchema);

@@ -1,3 +1,4 @@
+// Authentication Controller
 import {Request, Response} from 'express';
 import {
 	_hash,
@@ -18,13 +19,13 @@ export class AuthController<T extends Model<Document>> extends AppController<any
 	}
 
 	async signup(req: Request, res: Response, next: Function) {
+		try {
 		const {username, password, email, fullname, mobile} : IUser = req.body;
 		const token : string = generateToken({
 			username,
 			password
 		});
 		const encryptedPwd : string = await _hash(password);
-		try {
 		const user: IUser = await this.add({username,
 			password: encryptedPwd,
 			email,
@@ -34,24 +35,36 @@ export class AuthController<T extends Model<Document>> extends AppController<any
 		} as IUser)
 				res.send('success');
 		} catch (e) {
-				logger.log('error', e, );
 				res.send('failure');
-			return;
+				logger.log('error', e);
 		}
 	}
 
 	async auth (req: Request, res: Response, next: Function) {
-		const {token, username, password} : IUser = req.body;
-		if (token) {
-			const user:IUser =  await this.find({token} as IUser);
-			const userInfo:any = verifyToken<String>(token);
-					res.send(userInfo ? 'success' : 'failure');
-		}
+		try {
+			const {token, username, password} : IUser = req.body;
+			let user:IUser = null;
+			if (token) {
+				user = await this.find({token} as IUser);
+				const userInfo:any = verifyToken<String>(token);
+				if (!user || !userInfo) {
+					res.sendStatus(404);
+					return;
+				}
+			}
 
-		if (username && password) {
-			const user: IUser = await this.find({username, password} as IUser);
-			const result:boolean = await _hashCompare(password, user.password);
-					res.send(result ? 'success' : 'failure');
+			if (username && password) {
+				user = await this.find({username} as IUser);
+				const result:boolean = await _hashCompare(password, user.password);
+				if (!user || !result) {
+					res.sendStatus(404);
+					return;
+				}
+			}
+
+			res.send(user);
+		} catch(e) {
+			logger.log('error', e);
 		}
 	}
 }

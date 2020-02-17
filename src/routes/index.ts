@@ -1,10 +1,9 @@
 import {Router} from 'express';
-import {AuthController} from '@controller';
-import {UserModel} from '@entity';
-const router:any = Router();
-const authController = new AuthController(UserModel);
+import {AuthMiddleware, PostMiddleware, CommentMiddleware} from '@middlewares';
+function routes(app) {
+	app.use('/auth', AuthMiddleware);
+	app.use('/post', PostMiddleware);
+	app.use('/comment', CommentMiddleware);
+}
 
-router.post('/auth', authController.auth);
-router.post('/auth/signup', authController.signup);
-
-export default router;
+export default routes;

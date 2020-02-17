@@ -14,14 +14,6 @@ const CommentSchema : Schema = new Schema({
 		type: Types.ObjectId,
 		refer: UserModel
 	},
-	created_at: {
-		type: Date,
-		default: Date.now
-	},
-	updated_at: {
-		type: Date,
-		default: Date.now
-	},
 	liked: {
 		type: Number,
 		default: 1
@@ -31,5 +23,5 @@ const CommentSchema : Schema = new Schema({
 		default: 0
 	},
 	post: {type: Types.ObjectId, refer: PostModel}
-});
+}, {timestamps:true});
 export const CommentModel:Model<IComment> = model<IComment>('Comment', CommentSchema);

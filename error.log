@@ -1,0 +1,54 @@
+{ driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'Dragon' },
+  errmsg:
+   'E11000 duplicate key error collection: reddit-clone.users index: username_1 dup key: { username: "Dragon" }',
+  level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-16T16:04:10.179Z',
+  [Symbol(mongoErrorContextSymbol)]: {} }
+{ driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'Dragon' },
+  errmsg:
+   'E11000 duplicate key error collection: reddit-clone.users index: username_1 dup key: { username: "Dragon" }',
+  level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-16T16:05:02.111Z',
+  [Symbol(mongoErrorContextSymbol)]: {} }
+{ driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'Dragon' },
+  errmsg:
+   'E11000 duplicate key error collection: reddit-clone.users index: username_1 dup key: { username: "Dragon" }',
+  level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-16T16:07:32.684Z',
+  [Symbol(mongoErrorContextSymbol)]: {} }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-16T16:11:39.783Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-16T16:11:56.583Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-16T16:12:05.234Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-16T16:12:49.236Z' }
+{ message:
+   'Parameter "filter" to findOne() must be an object, got Hello',
+  name: 'ObjectParameterError',
+  level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-17T17:02:27.369Z' }
