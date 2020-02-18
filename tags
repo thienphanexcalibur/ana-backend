@@ -1,0 +1,181 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AppController	src/controller/app.controller.js	/^    function AppController(model) {$/;"	F
+AuthController	src/controller/auth.controller.js	/^    function AuthController(model) {$/;"	F
+Comment_1	src/entity/index.js	/^var Comment_1 = require(".\/Comment");$/;"	V
+Comment_1	src/entity/index.js	/^var Comment_1 = require(".\/Comment");$/;"	v
+PostController	src/controller/post.controller.js	/^    function PostController() {$/;"	F
+Post_1	src/entity/Comment.js	/^var Post_1 = require(".\/Post");$/;"	V
+Post_1	src/entity/Comment.js	/^var Post_1 = require(".\/Post");$/;"	v
+Post_1	src/entity/User.js	/^var Post_1 = require(".\/Post");$/;"	V
+Post_1	src/entity/User.js	/^var Post_1 = require(".\/Post");$/;"	v
+Post_1	src/entity/index.js	/^var Post_1 = require(".\/Post");$/;"	V
+Post_1	src/entity/index.js	/^var Post_1 = require(".\/Post");$/;"	v
+User_1	src/entity/Comment.js	/^var User_1 = require(".\/User");$/;"	V
+User_1	src/entity/Comment.js	/^var User_1 = require(".\/User");$/;"	v
+User_1	src/entity/index.js	/^var User_1 = require(".\/User");$/;"	V
+User_1	src/entity/index.js	/^var User_1 = require(".\/User");$/;"	v
+_	src/controller/auth.controller.js	/^    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;$/;"	O
+_	src/controller/post.controller.js	/^    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;$/;"	O
+_.trys	src/controller/auth.controller.js	/^    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;$/;"	p
+_.trys	src/controller/post.controller.js	/^    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;$/;"	p
+__	src/controller/auth.controller.js	/^        function __() { this.constructor = d; }$/;"	F
+_a	src/app.js	/^var _a = process.env, SERVER_HOST = _a.SERVER_HOST, SERVER_PORT = _a.SERVER_PORT, DB_HOST = _a.DB_HOST, DB_PORT = _a.DB_PORT, DB_ROOT = _a.DB_ROOT;$/;"	V
+_a	src/app.js	/^var _a = process.env, SERVER_HOST = _a.SERVER_HOST, SERVER_PORT = _a.SERVER_PORT, DB_HOST = _a.DB_HOST, DB_PORT = _a.DB_PORT, DB_ROOT = _a.DB_ROOT;$/;"	v
+_a	src/controller/auth.controller.js	/^                        _a = req.body, token = _a.token, username = _a.username, password = _a.password;$/;"	P
+_a	src/controller/auth.controller.js	/^                        _a = req.body, username = _a.username, password = _a.password, email = _a.email, fullname = _a.fullname, mobile = _a.mobile;$/;"	P
+_a	src/controller/post.controller.js	/^                        _a = req.body, title = _a.title, content = _a.content, byUser = _a.byUser;$/;"	P
+_a	src/controller/post.controller.js	/^                        _a = req.body, title = _a.title, content = _a.content;$/;"	P
+_a	src/utils/log.js	/^var _a = winston.format, combine = _a.combine, timestamp = _a.timestamp, label = _a.label, prettyPrint = _a.prettyPrint, colorize = _a.colorize;$/;"	V
+_a	src/utils/log.js	/^var _a = winston.format, combine = _a.combine, timestamp = _a.timestamp, label = _a.label, prettyPrint = _a.prettyPrint, colorize = _a.colorize;$/;"	v
+_b	src/utils/log.js	/^var _b = process.env, DB_HOST = _b.DB_HOST, DB_PORT = _b.DB_PORT, DB_ROOT = _b.DB_ROOT;$/;"	V
+_b	src/utils/log.js	/^var _b = process.env, DB_HOST = _b.DB_HOST, DB_PORT = _b.DB_PORT, DB_ROOT = _b.DB_ROOT;$/;"	v
+_controller_1	src/routes/index.js	/^var _controller_1 = require("@controller");$/;"	V
+_controller_1	src/routes/index.js	/^var _controller_1 = require("@controller");$/;"	v
+_entity_1	src/controller/post.controller.js	/^var _entity_1 = require("@entity");$/;"	V
+_entity_1	src/controller/post.controller.js	/^var _entity_1 = require("@entity");$/;"	v
+_entity_1	src/routes/index.js	/^var _entity_1 = require("@entity");$/;"	V
+_entity_1	src/routes/index.js	/^var _entity_1 = require("@entity");$/;"	v
+_hash	src/utils/index.js	/^function _hash(s, salt) {$/;"	F
+_hash	src/utils/index.js	/^function _hash(s, salt) {$/;"	f
+_hashCompare	src/utils/index.js	/^function _hashCompare(s1, hash) {$/;"	F
+_hashCompare	src/utils/index.js	/^function _hashCompare(s1, hash) {$/;"	f
+_routes_1	src/app.js	/^var _routes_1 = require("@routes");$/;"	V
+_routes_1	src/app.js	/^var _routes_1 = require("@routes");$/;"	v
+_this	src/controller/auth.controller.js	/^        var _this = _super.call(this, model) || this;$/;"	V
+_utils_1	src/controller/auth.controller.js	/^var _utils_1 = require("@utils");$/;"	V
+_utils_1	src/controller/auth.controller.js	/^var _utils_1 = require("@utils");$/;"	v
+_utils_2	src/controller/auth.controller.js	/^var _utils_2 = require("@utils");$/;"	V
+_utils_2	src/controller/auth.controller.js	/^var _utils_2 = require("@utils");$/;"	v
+add	src/controller/app.controller.js	/^        this.add = this.add.bind(this);$/;"	P
+add	src/controller/post.controller.js	/^        this.add = this.add.bind(this);$/;"	P
+adopt	src/controller/auth.controller.js	/^    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }$/;"	F
+adopt	src/controller/post.controller.js	/^    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }$/;"	F
+app	src/app.js	/^var app = express();$/;"	V
+app	src/app.js	/^var app = express();$/;"	v
+app_controller_1	src/controller/auth.controller.js	/^var app_controller_1 = require("@controller\/app.controller");$/;"	V
+app_controller_1	src/controller/auth.controller.js	/^var app_controller_1 = require("@controller\/app.controller");$/;"	v
+authController	src/routes/index.js	/^var authController = new _controller_1.AuthController(_entity_1.UserModel);$/;"	V
+auth_controller_1	src/controller/index.js	/^var auth_controller_1 = require(".\/auth.controller");$/;"	V
+auth_controller_1	src/controller/index.js	/^var auth_controller_1 = require(".\/auth.controller");$/;"	v
+bcrypt_1	src/utils/index.js	/^var bcrypt_1 = require("bcrypt");$/;"	V
+bcrypt_1	src/utils/index.js	/^var bcrypt_1 = require("bcrypt");$/;"	v
+bodyParser	src/app.js	/^var bodyParser = require("body-parser");$/;"	V
+bodyParser	src/app.js	/^var bodyParser = require("body-parser");$/;"	v
+byUser	src/entity/Post.js	/^    byUser: { type: mongoose_1.Types.ObjectId, ref: 'User' },$/;"	P
+comment	src/entity/Comment.js	/^    comment: String,$/;"	P
+comments	src/entity/Post.js	/^    comments: [{ type: mongoose_1.Types.ObjectId, ref: 'Comment' }]$/;"	P
+db	src/app.js	/^var db = mongoose.connection;$/;"	V
+db	src/app.js	/^var db = mongoose.connection;$/;"	v
+db	src/utils/log.js	/^            db: "mongodb:\/\/" + DB_HOST + ":" + DB_PORT + "\/" + DB_ROOT,$/;"	P
+dbURI	src/app.js	/^var dbURI = "mongodb:\/\/" + DB_HOST + ":" + DB_PORT + "\/" + DB_ROOT;$/;"	V
+dbURI	src/app.js	/^var dbURI = "mongodb:\/\/" + DB_HOST + ":" + DB_PORT + "\/" + DB_ROOT;$/;"	v
+decoded	src/utils/index.js	/^        var decoded = jsonwebtoken_1.verify(token, secret);$/;"	V
+default	src/entity/Comment.js	/^        default: 0$/;"	P
+default	src/entity/Comment.js	/^        default: 1$/;"	P
+default	src/entity/Comment.js	/^        default: Date.now$/;"	P
+default	src/entity/Post.js	/^        default: Date.now$/;"	P
+defaultMeta	src/utils/log.js	/^    defaultMeta: { service: 'user-service' },$/;"	P
+delete	src/controller/post.controller.js	/^        this.delete = this.delete.bind(this);$/;"	P
+e_1	src/controller/auth.controller.js	/^                        e_1 = _b.sent();$/;"	P
+edit	src/controller/post.controller.js	/^        this.edit = this.edit.bind(this);$/;"	P
+email	src/controller/auth.controller.js	/^                                email: email,$/;"	P
+encryptedPwd	src/controller/auth.controller.js	/^                        encryptedPwd = _b.sent();$/;"	P
+express	src/app.js	/^var express = require("express");$/;"	V
+express	src/app.js	/^var express = require("express");$/;"	v
+express_1	src/routes/index.js	/^var express_1 = require("express");$/;"	V
+express_1	src/routes/index.js	/^var express_1 = require("express");$/;"	v
+extendStatics	src/controller/auth.controller.js	/^        extendStatics = Object.setPrototypeOf ||$/;"	P
+extendStatics	src/controller/auth.controller.js	/^    var extendStatics = function (d, b) {$/;"	C
+find	src/controller/app.controller.js	/^        this.find = this.find.bind(this);$/;"	P
+format	src/utils/log.js	/^            format: combine(colorize(), timestamp(), prettyPrint())$/;"	P
+fs	src/utils/index.js	/^var fs = require('fs');$/;"	V
+fs	src/utils/index.js	/^var fs = require('fs');$/;"	v
+fulfilled	src/controller/auth.controller.js	/^        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }$/;"	F
+fulfilled	src/controller/post.controller.js	/^        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }$/;"	F
+fullname	src/controller/auth.controller.js	/^                                fullname: fullname,$/;"	P
+function.adopt	src/controller/auth.controller.js	/^    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }$/;"	f
+function.adopt	src/controller/post.controller.js	/^    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }$/;"	f
+function.verb	src/controller/auth.controller.js	/^    function verb(n) { return function (v) { return step([n, v]); }; }$/;"	f
+function.verb	src/controller/post.controller.js	/^    function verb(n) { return function (v) { return step([n, v]); }; }$/;"	f
+generateToken	src/utils/index.js	/^function generateToken(payload) {$/;"	F
+generateToken	src/utils/index.js	/^function generateToken(payload) {$/;"	f
+id	src/controller/post.controller.js	/^                        id = req.params.id;$/;"	P
+id	src/controller/post.controller.js	/^                id = req.params.id;$/;"	P
+includeIds	src/utils/log.js	/^            includeIds: true$/;"	P
+jsonwebtoken_1	src/utils/index.js	/^var jsonwebtoken_1 = require("jsonwebtoken");$/;"	V
+jsonwebtoken_1	src/utils/index.js	/^var jsonwebtoken_1 = require("jsonwebtoken");$/;"	v
+level	src/utils/log.js	/^            level: 'error',$/;"	P
+log_1	src/utils/index.js	/^var log_1 = require(".\/log");$/;"	V
+log_1	src/utils/index.js	/^var log_1 = require(".\/log");$/;"	v
+mobile	src/controller/auth.controller.js	/^                                mobile: mobile,$/;"	P
+model	src/controller/app.controller.js	/^        this.model = model;$/;"	P
+modify	src/controller/app.controller.js	/^        this.modify = this.modify.bind(this);$/;"	P
+mongoose	src/app.js	/^var mongoose = require("mongoose");$/;"	V
+mongoose	src/app.js	/^var mongoose = require("mongoose");$/;"	v
+mongoose_1	src/entity/Comment.js	/^var mongoose_1 = require("mongoose");$/;"	V
+mongoose_1	src/entity/Comment.js	/^var mongoose_1 = require("mongoose");$/;"	v
+mongoose_1	src/entity/Post.js	/^var mongoose_1 = require("mongoose");$/;"	V
+mongoose_1	src/entity/Post.js	/^var mongoose_1 = require("mongoose");$/;"	v
+mongoose_1	src/entity/User.js	/^var mongoose_1 = require("mongoose");$/;"	V
+mongoose_1	src/entity/User.js	/^var mongoose_1 = require("mongoose");$/;"	v
+op	src/controller/auth.controller.js	/^            op = body.call(thisArg, _);$/;"	P
+op	src/controller/post.controller.js	/^            op = body.call(thisArg, _);$/;"	P
+options	src/utils/log.js	/^            options: { useNewUrlParser: true, useUnifiedTopology: true },$/;"	P
+password	src/controller/auth.controller.js	/^                                password: encryptedPwd,$/;"	P
+password	src/controller/auth.controller.js	/^                            password: password$/;"	P
+path	src/utils/index.js	/^var path = require('path');$/;"	V
+path	src/utils/index.js	/^var path = require('path');$/;"	v
+post	src/entity/Comment.js	/^    post: { type: mongoose_1.Types.ObjectId, refer: Post_1.PostModel }$/;"	P
+posts	src/entity/User.js	/^    posts: [{ type: mongoose_1.Types.ObjectId, ref: Post_1.PostModel }],$/;"	P
+refer	src/entity/Comment.js	/^        refer: User_1.UserModel$/;"	P
+rejected	src/controller/auth.controller.js	/^        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }$/;"	F
+rejected	src/controller/auth.controller.js	/^        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }$/;"	f
+rejected	src/controller/post.controller.js	/^        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }$/;"	F
+rejected	src/controller/post.controller.js	/^        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }$/;"	f
+required	src/entity/User.js	/^        required: true,$/;"	P
+result	src/controller/auth.controller.js	/^                        result = _b.sent();$/;"	P
+return.next	src/controller/auth.controller.js	/^    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;$/;"	p
+return.next	src/controller/post.controller.js	/^    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;$/;"	p
+router	src/routes/index.js	/^var router = express_1.Router();$/;"	V
+router	src/routes/index.js	/^var router = express_1.Router();$/;"	v
+secret	src/utils/index.js	/^var secret = fs.readFileSync(path.resolve(__dirname, '..\/..\/private.pem'));$/;"	V
+secret	src/utils/index.js	/^var secret = fs.readFileSync(path.resolve(__dirname, '..\/..\/private.pem'));$/;"	v
+step	src/controller/auth.controller.js	/^        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }$/;"	F
+step	src/controller/auth.controller.js	/^        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }$/;"	f
+step	src/controller/auth.controller.js	/^    function step(op) {$/;"	F
+step	src/controller/post.controller.js	/^        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }$/;"	F
+step	src/controller/post.controller.js	/^        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }$/;"	f
+step	src/controller/post.controller.js	/^    function step(op) {$/;"	F
+token	src/controller/auth.controller.js	/^                                token: token$/;"	P
+token	src/entity/User.js	/^    token: String$/;"	P
+transports	src/utils/log.js	/^    transports: [$/;"	P
+transports	src/utils/log.js	/^var transports = winston.transports;$/;"	V
+transports	src/utils/log.js	/^var transports = winston.transports;$/;"	v
+type	src/entity/Comment.js	/^        type: Date,$/;"	P
+type	src/entity/Comment.js	/^        type: Number,$/;"	P
+type	src/entity/Comment.js	/^        type: mongoose_1.Types.ObjectId,$/;"	P
+type	src/entity/Post.js	/^        type: Date,$/;"	P
+type	src/entity/Post.js	/^        type: String$/;"	P
+type	src/entity/User.js	/^        type: String$/;"	P
+type	src/entity/User.js	/^        type: String,$/;"	P
+unique	src/entity/User.js	/^        unique: true$/;"	P
+user	src/controller/auth.controller.js	/^                        user = _b.sent();$/;"	P
+userInfo	src/controller/auth.controller.js	/^                        userInfo = _utils_1.verifyToken(token);$/;"	P
+username	src/controller/auth.controller.js	/^                            username: username,$/;"	P
+util_1	src/utils/index.js	/^var util_1 = require("util");$/;"	V
+util_1	src/utils/index.js	/^var util_1 = require("util");$/;"	v
+var._.label	src/controller/auth.controller.js	/^    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;$/;"	p
+var._.label	src/controller/post.controller.js	/^    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;$/;"	p
+var._.sent	src/controller/auth.controller.js	/^    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;$/;"	m
+var._.sent	src/controller/post.controller.js	/^    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;$/;"	m
+verb	src/controller/auth.controller.js	/^    function verb(n) { return function (v) { return step([n, v]); }; }$/;"	F
+verb	src/controller/post.controller.js	/^    function verb(n) { return function (v) { return step([n, v]); }; }$/;"	F
+verifyToken	src/utils/index.js	/^function verifyToken(token) {$/;"	F
+verifyToken	src/utils/index.js	/^function verifyToken(token) {$/;"	f
+winston	src/utils/log.js	/^var winston = require("winston");$/;"	V
+winston	src/utils/log.js	/^var winston = require("winston");$/;"	v
