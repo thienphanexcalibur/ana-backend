@@ -3,10 +3,10 @@ import {UserModel} from './User';
 import {PostModel} from './Post';
 export interface IComment extends Document {
 	comment: string,
-	byUser: string,
+	byUser: Types.ObjectId,
 	liked: number,
 	disliked: number,
-	post: number,
+	post: Types.ObjectId,
 }
 const CommentSchema : Schema = new Schema({
 	comment: String,

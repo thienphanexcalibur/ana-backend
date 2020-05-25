@@ -52,3 +52,177 @@
   level: '\u001b[31merror\u001b[39m',
   service: 'user-service',
   timestamp: '2020-02-17T17:02:27.369Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T07:44:17.550Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T07:45:06.177Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T07:45:29.767Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T07:46:00.847Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T07:46:03.691Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T07:46:36.460Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T07:46:52.308Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T07:47:36.085Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T07:49:04.617Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:34:48.628Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:38:23.893Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:38:27.986Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:38:56.108Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:39:12.938Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:39:55.518Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:40:15.711Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:40:16.976Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:40:22.233Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:41:42.923Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:42:11.089Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:42:19.049Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:43:11.111Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:46:38.331Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:48:06.589Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T08:48:52.607Z' }
+{ driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'thien123' },
+  errmsg:
+   'E11000 duplicate key error collection: reddit-clone.users index: username_1 dup key: { username: "thien123" }',
+  level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T09:09:54.661Z',
+  [Symbol(mongoErrorContextSymbol)]: {} }
+{ driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'thien23' },
+  errmsg:
+   'E11000 duplicate key error collection: reddit-clone.users index: username_1 dup key: { username: "thien23" }',
+  level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T09:14:13.094Z',
+  [Symbol(mongoErrorContextSymbol)]: {} }
+{ level: '\u001b[31merror\u001b[39m',
+  message: 'User not found',
+  timestamp: '2020-02-24T10:34:16.741Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  message: 'User not found',
+  timestamp: '2020-02-24T10:34:27.538Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  message: 'User not found',
+  timestamp: '2020-02-24T10:34:44.669Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  message: undefined,
+  timestamp: '2020-02-24T10:34:52.461Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  message: 'User not found',
+  timestamp: '2020-02-24T10:35:23.507Z' }
+{ driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'thien23' },
+  errmsg:
+   'E11000 duplicate key error collection: reddit-clone.users index: username_1 dup key: { username: "thien23" }',
+  level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T14:46:13.070Z',
+  [Symbol(mongoErrorContextSymbol)]: {} }
+{ driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'thien23' },
+  errmsg:
+   'E11000 duplicate key error collection: reddit-clone.users index: username_1 dup key: { username: "thien23" }',
+  level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T14:56:03.720Z',
+  [Symbol(mongoErrorContextSymbol)]: {} }
+{ driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'thien23' },
+  errmsg:
+   'E11000 duplicate key error collection: reddit-clone.users index: username_1 dup key: { username: "thien23" }',
+  level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T14:56:49.770Z',
+  [Symbol(mongoErrorContextSymbol)]: {} }
+{ driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'thien23' },
+  errmsg:
+   'E11000 duplicate key error collection: reddit-clone.users index: username_1 dup key: { username: "thien23" }',
+  level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T14:57:09.880Z',
+  [Symbol(mongoErrorContextSymbol)]: {} }
+{ driver: true,
+  name: 'MongoError',
+  index: 0,
+  code: 11000,
+  keyPattern: { username: 1 },
+  keyValue: { username: 'thien23' },
+  errmsg:
+   'E11000 duplicate key error collection: reddit-clone.users index: username_1 dup key: { username: "thien23" }',
+  level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-02-24T15:01:25.743Z',
+  [Symbol(mongoErrorContextSymbol)]: {} }

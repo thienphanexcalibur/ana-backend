@@ -1,6 +1,4 @@
 import {Schema, Document, model, Model, Types } from 'mongoose';
-import {UserModel} from './User';
-import {CommentModel} from './Comment';
 export interface IPost extends Document {
 	title: string,
 	content: string,
@@ -23,6 +21,14 @@ const PostSchema : Schema = new Schema({
 	updated_date: {
 		type: Date,
 		default: Date.now
+	},
+	liked: {
+		type: Number,
+		default: 1
+	},
+	disliked: {
+		type: Number,
+		default: 0
 	},
 	byUser: {type: Types.ObjectId, ref: 'User'},
 	comments: [{type: Types.ObjectId, ref: 'Comment'}]

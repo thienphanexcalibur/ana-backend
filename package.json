@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env mode=DEVELOPMENT tsc-watch --onSuccess \"node -r tsconfig-paths/register -r dotenv/config  src/app.js\"",
-		"prod": "cross-env mode=PRODUCTIOn tsc-watch --onSuccess \"node -r tsconfig-paths/register -r dotenv/config  src/app.js\""
+    "prod": "cross-env mode=PRODUCTION tsc-watch --onSuccess \"node -r tsconfig-paths/register -r dotenv/config  src/app.js\"",
+    "debug": "cross-env mode=DEVELOPMENT tsc-watch --onSuccess \"node inspect -r tsconfig-paths/register -r dotenv/config src/app.js\""
+
   },
   "author": "Thien Phan",
   "license": "ISC",
@@ -29,5 +31,8 @@
     "typescript": "^3.7.5",
     "winston": "^3.2.1",
     "winston-mongodb": "^5.0.1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5"
   }
 }

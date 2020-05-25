@@ -1,4 +1,3 @@
-import {Router} from 'express';
 import {AuthMiddleware, PostMiddleware, CommentMiddleware} from '@middlewares';
 function routes(app) {
 	app.use('/auth', AuthMiddleware);

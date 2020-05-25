@@ -1,4 +1,4 @@
-import {Request, Response} from 'express';
+import {Request, Response, NextFunction} from 'express';
 import {Model, Document, Query, Types} from 'mongoose';
 import AppController from '@controller/app.controller'
 import {PostModel, IPost} from '@entity';
@@ -11,27 +11,39 @@ export class PostController<T extends Model<Document>> extends AppController<T> 
 		this.editPost = this.editPost.bind(this);
 		this.deletePost = this.deletePost.bind(this);
 		this.getPost = this.getPost.bind(this);
+		this.getAllPost = this.getAllPost.bind(this);
 		this.addComment = this.addComment.bind(this);
 	}
 
-	private async addComment(post: Types.ObjectId, commentId: Types.ObjectId): Promise<any> {
+	async addComment(post: Types.ObjectId, commentId: Types.ObjectId): Promise<any> {
 		const foundPost = await this.find(post);
 		foundPost.comments.push(commentId);
 		return foundPost.save();
 	}
 
-	async addPost(req: Request, res: Response, next: Function) {
+	async addPost(req: Request, res: Response, next: NextFunction) {
 		const {title, content, byUser} : IPost = req.body;
 		try {
 			const newPost = await this.add({title, content, byUser} as IPost);
 			res.send(newPost);
 		} catch(e) {
-				res.send('failure');
-				logger.log('error', e);
+			res.send('failure');
+			logger.log('error', e);
 		}
 	}
 
-	async editPost(req: Request, res: Response, next: Function) {
+	async getAllPost(req: Request, res: Response, next: NextFunction) {
+		try {
+			const posts = await this.find({});
+			res.send(posts);
+		} catch(e) {
+			res.send('failure');
+			logger.log('error', e);
+		}
+	}
+
+
+	async editPost(req: Request, res: Response, next: NextFunction) {
 		try {
 			const {id} = req.params;
 			const {title, content, byUser} = req.body;
@@ -45,7 +57,7 @@ export class PostController<T extends Model<Document>> extends AppController<T> 
 		}
 	}
 
-	async deletePost(req: Request, res: Response, next: Function) {
+	async deletePost(req: Request, res: Response, next: NextFunction) {
 		const {id} = req.params;
 		try {
 			const deletedPost = await this.remove(id);
@@ -60,7 +72,7 @@ export class PostController<T extends Model<Document>> extends AppController<T> 
 		}
 	}
 
-	async getPost(req: Request, res: Response, next: Function) {
+	async getPost(req: Request, res: Response, next: NextFunction) {
 		const {id} = req.params;
 		try {
 			const post = await this.find(id);

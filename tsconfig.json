@@ -1,25 +1,26 @@
 {
-  "compilerOptions": {
-    "lib": ["es5", "es6"],
-    "target": "es5",
-    "module": "commonjs",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+	"compilerOptions": {
+		"lib": ["es5", "es6"],
+		"target": "es5",
+		"module": "commonjs",
+		"sourceMap": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
 		"allowSyntheticDefaultImports": false,
 		"moduleResolution": "node",
 		"baseUrl": ".",
 		"paths": {
-				"root": ["./"],
-				"@": ["./src"],
-				"@routes": ["./src/routes"],
-				"@controller": ["./src/controller"],
-				"@controller/*": ["./src/controller/*"],
-				"@middlewares": ["./src/middlewares"],
-				"@middlewares/*": ["./src/middlewares/*"],
-				"@entity": ["./src/entity"],
-				"@utils/*": ["./src/utils/*"],
-				"@utils": ["./src/utils"]
-			}
+			"root": ["./"],
+			"@": ["./src"],
+			"@routes": ["./src/routes"],
+			"@controller": ["./src/controller"],
+			"@controller/*": ["./src/controller/*"],
+			"@middlewares": ["./src/middlewares"],
+			"@middlewares/*": ["./src/middlewares/*"],
+			"@entity": ["./src/entity"],
+			"@utils/*": ["./src/utils/*"],
+			"@utils": ["./src/utils"]
+		}
 	},
 	"exlude": [
 		"node_modules"
