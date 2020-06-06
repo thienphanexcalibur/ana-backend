@@ -1,5 +1,5 @@
 {
-  "name": "reddit-clone",
+  "name": "ana-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,6 @@
     "dev": "cross-env mode=DEVELOPMENT tsc-watch --onSuccess \"node -r tsconfig-paths/register -r dotenv/config  src/app.js\"",
     "prod": "cross-env mode=PRODUCTION tsc-watch --onSuccess \"node -r tsconfig-paths/register -r dotenv/config  src/app.js\"",
     "debug": "cross-env mode=DEVELOPMENT tsc-watch --onSuccess \"node inspect -r tsconfig-paths/register -r dotenv/config src/app.js\""
-
   },
   "author": "Thien Phan",
   "license": "ISC",
