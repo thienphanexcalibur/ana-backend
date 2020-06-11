@@ -109,7 +109,7 @@ var PostController = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.find({})];
+                        return [4 /*yield*/, this.find().populate('byUser', 'fullname').populate('comments').exec()];
                     case 1:
                         posts = _a.sent();
                         res.send(posts);

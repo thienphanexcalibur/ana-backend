@@ -226,3 +226,123 @@
   service: 'user-service',
   timestamp: '2020-02-24T15:01:25.743Z',
   [Symbol(mongoErrorContextSymbol)]: {} }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T11:02:39.870Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T11:02:58.422Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T11:03:23.791Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T11:03:41.149Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:18:31.325Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:18:40.008Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:18:43.945Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:20:06.997Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:34:23.322Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:34:45.422Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:36:26.161Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:37:38.896Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:37:41.957Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:40:26.586Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:40:35.119Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:40:58.439Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:41:08.941Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:41:30.895Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:41:39.531Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:42:13.389Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:42:24.912Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:43:45.089Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:43:52.894Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:44:00.585Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:45:11.139Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:45:36.923Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:45:47.234Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:45:55.110Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:46:04.495Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:46:10.008Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:46:54.877Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:47:23.691Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:50:32.976Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:50:48.931Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:50:56.744Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:51:03.494Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:51:06.092Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:51:13.403Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:52:12.913Z' }
+{ level: '\u001b[31merror\u001b[39m',
+  service: 'user-service',
+  timestamp: '2020-06-07T13:52:20.963Z' }

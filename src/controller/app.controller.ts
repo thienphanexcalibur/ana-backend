@@ -1,8 +1,8 @@
-import { Model, Document, Types } from 'mongoose';
+import { Model, Document, Types, Query } from 'mongoose';
 
 
 export default class AppController<T extends Model<Document>> {
-	private model: T;
+	public model: T;
 	constructor(model: T) {
 		this.model = model;
 		this.find = this.find.bind(this);
@@ -22,11 +22,11 @@ export default class AppController<T extends Model<Document>> {
 		return this.model.findByIdAndRemove(_id).exec();
 	}
 
-	public find<T>(pre: T) : Promise<any> {
+	public find<T>(pre?: T) : Query<any> {
 		if (Types.ObjectId.isValid(pre as any)) {
-		return this.model.findById(pre).exec();
+			return this.model.findById(pre);
 		}
-		return this.model.findOne(pre).exec();
+			return this.model.find(pre);
 	}
 	public _Error<T>(error: T) : T {
 		return error;

@@ -4,8 +4,10 @@ export interface IPost extends Document {
 	content: string,
 	created_date?: number,
 	updated_date?: number,
-	byUser: string,
-	comments?: Types.ObjectId[]
+	liked: number,
+	disliked: number,
+	byUser: Schema.Types.ObjectId,
+	comments?: Schema.Types.ObjectId[]
 }
 const PostSchema : Schema = new Schema({
 	title: {
@@ -30,7 +32,7 @@ const PostSchema : Schema = new Schema({
 		type: Number,
 		default: 0
 	},
-	byUser: {type: Types.ObjectId, ref: 'User'},
-	comments: [{type: Types.ObjectId, ref: 'Comment'}]
+	byUser: {type: Schema.Types.ObjectId, ref: 'User'},
+	comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
 });
 export const PostModel:Model<IPost> = model<IPost>('Post', PostSchema);

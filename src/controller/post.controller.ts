@@ -34,7 +34,7 @@ export class PostController<T extends Model<Document>> extends AppController<T> 
 
 	async getAllPost(req: Request, res: Response, next: NextFunction) {
 		try {
-			const posts = await this.find({});
+			const posts = await this.find().populate('byUser', 'fullname').populate('comments').exec();
 			res.send(posts);
 		} catch(e) {
 			res.send('failure');

@@ -19,9 +19,9 @@ var AppController = /** @class */ (function () {
     };
     AppController.prototype.find = function (pre) {
         if (mongoose_1.Types.ObjectId.isValid(pre)) {
-            return this.model.findById(pre).exec();
+            return this.model.findById(pre);
         }
-        return this.model.findOne(pre).exec();
+        return this.model.find(pre);
     };
     AppController.prototype._Error = function (error) {
         return error;
