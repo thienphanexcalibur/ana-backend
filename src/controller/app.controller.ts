@@ -22,11 +22,11 @@ export default class AppController<T extends Model<Document>> {
 		return this.model.findByIdAndRemove(_id).exec();
 	}
 
-	public find<T>(pre?: T) : Query<any> {
+	public find<T>(pre?: T, ...args: any) : Query<any> {
 		if (Types.ObjectId.isValid(pre as any)) {
-			return this.model.findById(pre);
+			return this.model.findById(pre, ...args);
 		}
-			return this.model.find(pre);
+			return this.model.find(pre, ...args);
 	}
 	public _Error<T>(error: T) : T {
 		return error;

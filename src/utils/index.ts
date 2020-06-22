@@ -1,4 +1,5 @@
 import {hash as bcryptHash, compare as bcryptCompare} from 'bcrypt';
+import { Types } from 'mongoose';
 import {promisify} from 'util';
 import {sign, verify} from 'jsonwebtoken';
 const fs = require('fs');
@@ -29,9 +30,8 @@ export function _hashCompare(s1: string, hash: string) : Promise<boolean> {
 }
 
 interface PayloadAuth extends Object {
-		username: string,
-		password: string
-}
+	id: Types.ObjectId
+};
 
 /**
  * Generate auth token
@@ -43,7 +43,7 @@ export function generateToken(payload: PayloadAuth) : string {
 	return sign(payload, secret);
 }
 
-export function verifyToken<T>(token: string) : T {
+export function verifyToken(token: string) : any {
 	try {
 		let decoded:any = verify(token, secret);
 		return decoded;

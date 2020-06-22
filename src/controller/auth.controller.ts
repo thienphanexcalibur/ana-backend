@@ -3,9 +3,10 @@ import {Request, Response, NextFunction} from 'express';
 import {
 	_hash,
 	_hashCompare,
-	generateToken
+	generateToken,
+	verifyToken
 } from '@utils';
-import {Model, Document} from 'mongoose';
+import {Model, Document, Types} from 'mongoose';
 import {IUser} from '@entity';
 import AppController from '@controller/app.controller';
 
@@ -16,12 +17,14 @@ export class AuthController<T extends Model<Document>> extends AppController<any
 		this.signup = this.signup.bind(this);
 	}
 
-	async signup(req: Request, res: Response, next: NextFunction) {
-		const {username, password, email, fullname, mobile} : IUser = req.body;
-		const token : string = generateToken({
+	async signup (req: Request, res: Response, next: NextFunction) {
+		const {
 			username,
-			password
-		});
+			password,
+			email,
+			fullname,
+			mobile
+		} : IUser = req.body;
 
 		const encryptedPwd : string = await _hash(password);
 
@@ -32,22 +35,33 @@ export class AuthController<T extends Model<Document>> extends AppController<any
 				password: encryptedPwd,
 				email,
 				fullname,
-				mobile,
-				token
+				mobile
 			} as IUser)
-		  res.sendStatus(200).send(user);
+			const token = generateToken({id: user._id}) as string;
+			user.token = token;
+			await user.save();
+		  res.cookie('auth', token, {maxAge: 2147483647, httpOnly: true}).send(user);
+		  next();
 		} catch (e) {
+			res.sendStatus(500);
 		  next(e);
 		}
 	}
 
 	async auth (req: Request, res: Response, next: NextFunction) {
 	  try {
-		const {token, username, password} : IUser = req.body;
+		const {username, password} : IUser = req.body;
+		const {auth} = req.cookies;
+		let userId: Types.ObjectId;
 		let user:IUser = null;
 		let result: boolean;
-		if (token) {
-			user = await this.find({token} as IUser);
+
+		if (auth) {
+			userId = (verifyToken(auth)).id;
+			user = await this.find(userId, 'username fullname email mobile');
+			if (user) {
+				result = true;
+			}
 		}
 
 		if (username && password) {
@@ -56,13 +70,14 @@ export class AuthController<T extends Model<Document>> extends AppController<any
 			result = await _hashCompare(password, user.password);
 		  }
 		}
+
 		if (user && result) {
-		  res.send(user);
+			  res.send(user);
 		} else {
-		  throw(this._Error({
-			statusCode: 404,
-			m: 'User not found'
-		  }));
+			  throw(this._Error({
+				statusCode: 404,
+				m: 'User not found'
+			  }));
 		}
 	  } catch(e) {
 		next(e);

@@ -1,6 +1,7 @@
 import {Schema, model, Model, Types, Document } from 'mongoose';
 import {UserModel} from './User';
 import {PostModel} from './Post';
+
 export interface IComment extends Document {
 	comment: string,
 	byUser: Types.ObjectId,
@@ -8,6 +9,7 @@ export interface IComment extends Document {
 	disliked: number,
 	post: Types.ObjectId,
 }
+
 const CommentSchema : Schema = new Schema({
 	comment: String,
 	byUser: {
@@ -24,4 +26,5 @@ const CommentSchema : Schema = new Schema({
 	},
 	post: {type: Types.ObjectId, refer: PostModel}
 }, {timestamps:true});
+
 export const CommentModel:Model<IComment> = model<IComment>('Comment', CommentSchema);

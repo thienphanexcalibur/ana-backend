@@ -4,5 +4,4 @@ function routes(app) {
 	app.use('/post', PostMiddleware);
 	app.use('/comment', CommentMiddleware);
 }
-
 export default routes;
