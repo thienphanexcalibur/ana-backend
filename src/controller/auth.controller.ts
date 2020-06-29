@@ -74,13 +74,11 @@ export class AuthController<T extends Model<Document>> extends AppController<any
 		if (user && result) {
 			  res.send(user);
 		} else {
-			  throw(this._Error({
-				statusCode: 404,
-				m: 'User not found'
-			  }));
+			  res.sendStatus(404);
 		}
 	  } catch(e) {
-		next(e);
+			res.sendStatus(500);
+			next(e);
 	  }
 	}
 }
