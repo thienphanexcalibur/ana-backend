@@ -2,10 +2,10 @@ import {
 	Request, Response, NextFunction,
 } from 'express';
 import {
-	Model, Document, Query, Types, Schema,
+	Model, Document, Types, Schema,
 } from 'mongoose';
 import AppController from '@controller/app.controller';
-import { PostModel, IPost, IComment } from '@entity';
+import { IPost } from '@entity';
 import { logger } from '@utils';
 
 export class PostController<T extends Model<Document>> extends AppController<T> {
@@ -39,7 +39,7 @@ export class PostController<T extends Model<Document>> extends AppController<T> 
 		}
 	}
 
-	async getAllPost(req: Request, res: Response) : Promise<void> {
+	async getAllPost(res: Response) : Promise<void> {
 		try {
 			const posts = await this.find().populate('byUser', 'fullname').populate('comments').exec();
 			res.send(posts);
@@ -66,7 +66,7 @@ export class PostController<T extends Model<Document>> extends AppController<T> 
 		}
 	}
 
-	async deletePost(req: Request, res: Response, next: NextFunction) : Promise<void> {
+	async deletePost(req: Request, res: Response) : Promise<void> {
 		const { id } = req.params;
 		try {
 			const deletedPost = await this.remove(id);
@@ -81,7 +81,7 @@ export class PostController<T extends Model<Document>> extends AppController<T> 
 		}
 	}
 
-	async getPost(req: Request, res: Response, next: NextFunction) : Promise<void> {
+	async getPost(req: Request, res: Response) : Promise<void> {
 		const { id } = req.params;
 		try {
 			const post = await this.find(id);

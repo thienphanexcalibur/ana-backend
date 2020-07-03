@@ -7,7 +7,7 @@ import {
 	verifyToken,
 } from '@utils';
 import {
-	Model, Document, Types, Schema,
+	Model, Document, Types,
 } from 'mongoose';
 import { IUser } from '@entity';
 import AppController from '@controller/app.controller';

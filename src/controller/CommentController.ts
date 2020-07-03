@@ -3,9 +3,8 @@ import { Model, Document, Schema } from 'mongoose';
 import AppController from '@controller/app.controller';
 import { PostController } from '@controller';
 import {
-	PostModel, IComment, IUser, IPost,
+	PostModel, IComment, IPost,
 } from '@entity';
-import { ObjectId } from 'mongodb';
 
 export class CommentController<T extends Model<Document>> extends AppController<T> {
 	public model: T;

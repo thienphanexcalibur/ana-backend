@@ -105,7 +105,7 @@ var PostController = /** @class */ (function (_super) {
             });
         });
     };
-    PostController.prototype.getAllPost = function (req, res) {
+    PostController.prototype.getAllPost = function (res) {
         return __awaiter(this, void 0, void 0, function () {
             var posts, e_2;
             return __generator(this, function (_a) {
@@ -155,7 +155,7 @@ var PostController = /** @class */ (function (_super) {
             });
         });
     };
-    PostController.prototype.deletePost = function (req, res, next) {
+    PostController.prototype.deletePost = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var id, deletedPost, e_4;
             return __generator(this, function (_a) {
@@ -185,7 +185,7 @@ var PostController = /** @class */ (function (_super) {
             });
         });
     };
-    PostController.prototype.getPost = function (req, res, next) {
+    PostController.prototype.getPost = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var id, post, e_5;
             return __generator(this, function (_a) {

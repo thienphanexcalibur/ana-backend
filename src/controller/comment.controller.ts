@@ -1,12 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import { Model, Document, Query } from 'mongoose';
+import { Model, Document } from 'mongoose';
 import AppController from '@controller/app.controller';
 import { PostController } from '@controller';
 import {
-	PostModel, CommentModel, IComment, IUser, IPost,
+	PostModel, IComment, IUser, IPost,
 } from '@entity';
-
-import { logger } from '@utils';
 
 export class CommentController<T extends Model<Document>> extends AppController<T> {
 	public model : T;
