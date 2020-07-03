@@ -1,4 +1,8 @@
-import {Schema, Document, model, Model, Types } from 'mongoose';
+/* eslint-disable camelcase */
+import {
+	Schema, Document, model, Model, Types,
+} from 'mongoose';
+
 export interface IPost extends Document {
 	title: string,
 	content: string,
@@ -11,28 +15,28 @@ export interface IPost extends Document {
 }
 const PostSchema : Schema = new Schema({
 	title: {
-		type: String
+		type: String,
 	},
 	content: {
-		type: String
+		type: String,
 	},
 	created_date: {
 		type: Date,
-		default: Date.now
+		default: Date.now,
 	},
 	updated_date: {
 		type: Date,
-		default: Date.now
+		default: Date.now,
 	},
 	liked: {
 		type: Number,
-		default: 1
+		default: 1,
 	},
 	disliked: {
 		type: Number,
-		default: 0
+		default: 0,
 	},
-	byUser: {type: Schema.Types.ObjectId, ref: 'User'},
-	comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
+	byUser: { type: Schema.Types.ObjectId, ref: 'User' },
+	comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 });
 export const PostModel:Model<IPost> = model<IPost>('Post', PostSchema);

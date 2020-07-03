@@ -1,17 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
-import { Model, Document, Query } from 'mongoose';
+import { Model, Document, Schema } from 'mongoose';
 import AppController from '@controller/app.controller';
 import { PostController } from '@controller';
 import {
-	PostModel, CommentModel, IComment, IUser, IPost,
+	PostModel, IComment, IUser, IPost,
 } from '@entity';
-
-import { logger } from '@utils';
+import { ObjectId } from 'mongodb';
 
 export class CommentController<T extends Model<Document>> extends AppController<T> {
-	public model : T;
+	public model: T;
 
-	postController: any
+	public postController: PostController<Model<Document>>
 
 	constructor(model: T) {
 		super(model);
@@ -21,11 +20,11 @@ export class CommentController<T extends Model<Document>> extends AppController<
 		this.postController = new PostController(PostModel);
 	}
 
-	async addComment(req: Request, res: Response, next: NextFunction) : Promise<void> {
-		const { comment, byUser, post } : IComment = req.body;
+	async addComment(req: Request, res: Response, next: NextFunction): Promise<void> {
+		const { comment, byUser, post }: IComment = req.body;
 		try {
-			const newComment: Document = await this.add({ comment, byUser, post } as IComment);
-			const newCommentId: string = newComment._id;
+			const newComment = await this.add({ comment, byUser, post }) as IComment;
+			const newCommentId: Schema.Types.ObjectId = newComment._id;
 			const updatedCommentPost = await this.postController.addComment(post, newCommentId);
 			if (newComment && updatedCommentPost) {
 				res.sendStatus(200).send(newComment);
@@ -40,12 +39,12 @@ export class CommentController<T extends Model<Document>> extends AppController<
 		}
 	}
 
-	async editComment(req: Request, res: Response, next: NextFunction) : Promise<void> {
+	async editComment(req: Request, res: Response, next: NextFunction): Promise<void> {
 		try {
 			const { id } = req.params;
 			const { title, content } = req.body;
 			// eslint-disable-next-line max-len
-			const modifiedPost : Document = await this.modify(id, { title, content, updated_date: Date.now() });
+			const modifiedPost = await this.modify(id, { title, content, updated_date: Date.now() }) as IPost;
 			if (modifiedPost) {
 				res.sendStatus(200).send(modifiedPost);
 			}
@@ -54,7 +53,7 @@ export class CommentController<T extends Model<Document>> extends AppController<
 		}
 	}
 
-	async deleteComment(req: Request, res: Response, next: NextFunction) : Promise<void> {
+	async deleteComment(req: Request, res: Response, next: NextFunction): Promise<void> {
 		const { id } = req.params;
 		try {
 			const deletedPost = await this.remove(id) as IPost;
@@ -62,20 +61,6 @@ export class CommentController<T extends Model<Document>> extends AppController<
 				res.sendStatus(200);
 			} else {
 				throw (new Error('error'));
-			}
-		} catch (e) {
-			next(e);
-		}
-	}
-
-	async getPost(req: Request, res: Response, next: NextFunction) : Promise<void> {
-		const { id } = req.params;
-		try {
-			const post = await this.find(id) as IUser[];
-			if (post) {
-				res.sendStatus(200).send(post);
-			} else {
-				res.sendStatus(404);
 			}
 		} catch (e) {
 			next(e);

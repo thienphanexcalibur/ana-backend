@@ -1,0 +1,33 @@
+6 ESLint rules behave differently from their TSLint counterparts:
+  * @typescript-eslint/no-unused-expressions:
+    - The TSLint optional config "allow-new" is the default ESLint behavior and will no longer be ignored.
+  * camelcase:
+    - Leading undescores in variable names will now be ignored.
+    - ESLint's camel-case rule does not allow pascal or snake case variable names. Those cases are reserved for class names and static methods.
+  * eqeqeq:
+    - Option "smart" allows for comparing two literal values, evaluating the value of typeof and null comparisons.
+  * no-invalid-this:
+    - Functions in methods will no longer be ignored.
+  * no-underscore-dangle:
+    - Leading and trailing underscores (_) on identifiers will now be ignored.
+  * prefer-arrow/prefer-arrow-functions:
+    - ESLint does not support allowing standalone function declarations.
+    - ESLint does not support allowing named functions defined with the function keyword.
+
+Could not resolve ESLint extension 'eslint-plugin-airbnb-base'.: Error: Cannot find module '/Users/thienphan/sideprojects/ana-backend/eslint-plugin-airbnb-base'
+Require stack:
+- /Users/thienphan/sideprojects/ana-backend/node_modules/tslint-to-eslint-config/src/adapters/nativeImporter.js
+- /Users/thienphan/sideprojects/ana-backend/node_modules/tslint-to-eslint-config/src/cli/main.js
+- /Users/thienphan/sideprojects/ana-backend/node_modules/tslint-to-eslint-config/bin/tslint-to-eslint-config
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:966:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:842:27)
+    at Module.require (internal/modules/cjs/loader.js:1026:19)
+    at require (internal/modules/cjs/helpers.js:72:18)
+    at /Users/thienphan/sideprojects/ana-backend/node_modules/tslint-to-eslint-config/src/adapters/nativeImporter.js:25:64
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    at async Object.exports.nativeImporter (/Users/thienphan/sideprojects/ana-backend/node_modules/tslint-to-eslint-config/src/adapters/nativeImporter.js:25:16)
+    at async importFile (/Users/thienphan/sideprojects/ana-backend/node_modules/tslint-to-eslint-config/src/input/importer.js:32:20)
+    at async exports.importer (/Users/thienphan/sideprojects/ana-backend/node_modules/tslint-to-eslint-config/src/input/importer.js:50:28)
+    at async /Users/thienphan/sideprojects/ana-backend/node_modules/tslint-to-eslint-config/src/creation/summarization/retrieveExtendsValues.js:50:26
+
+

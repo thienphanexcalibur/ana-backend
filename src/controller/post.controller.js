@@ -63,21 +63,24 @@ var PostController = /** @class */ (function (_super) {
         _this.addComment = _this.addComment.bind(_this);
         return _this;
     }
-    PostController.prototype.addComment = function (post, commentId) {
+    PostController.prototype.addComment = function (postId, commentId) {
         return __awaiter(this, void 0, void 0, function () {
-            var foundPost;
+            var foundPost, savedPost;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.find(post)];
+                    case 0: return [4 /*yield*/, this.find(postId).exec()];
                     case 1:
                         foundPost = _a.sent();
                         foundPost.comments.push(commentId);
-                        return [2 /*return*/, foundPost.save()];
+                        return [4 /*yield*/, (foundPost.save())];
+                    case 2:
+                        savedPost = _a.sent();
+                        return [2 /*return*/, savedPost];
                 }
             });
         });
     };
-    PostController.prototype.addPost = function (req, res, next) {
+    PostController.prototype.addPost = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var _a, title, content, byUser, newPost, e_1;
             return __generator(this, function (_b) {
@@ -102,7 +105,7 @@ var PostController = /** @class */ (function (_super) {
             });
         });
     };
-    PostController.prototype.getAllPost = function (req, res, next) {
+    PostController.prototype.getAllPost = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var posts, e_2;
             return __generator(this, function (_a) {
@@ -124,7 +127,7 @@ var PostController = /** @class */ (function (_super) {
             });
         });
     };
-    PostController.prototype.editPost = function (req, res, next) {
+    PostController.prototype.editPost = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var id, _a, title, content, byUser, modifiedPost, e_3;
             return __generator(this, function (_b) {
@@ -133,7 +136,9 @@ var PostController = /** @class */ (function (_super) {
                         _b.trys.push([0, 2, , 3]);
                         id = req.params.id;
                         _a = req.body, title = _a.title, content = _a.content, byUser = _a.byUser;
-                        return [4 /*yield*/, this.modify(id, { title: title, content: content, updated_date: Date.now(), byUser: byUser })];
+                        return [4 /*yield*/, this.modify(id, {
+                                title: title, content: content, updated_date: Date.now(), byUser: byUser,
+                            })];
                     case 1:
                         modifiedPost = _b.sent();
                         if (modifiedPost) {

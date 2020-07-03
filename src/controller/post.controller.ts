@@ -1,11 +1,17 @@
-import {Request, Response, NextFunction} from 'express';
-import {Model, Document, Query, Types} from 'mongoose';
-import AppController from '@controller/app.controller'
-import {PostModel, IPost} from '@entity';
-import {logger} from '@utils';
+import {
+	Request, Response, NextFunction,
+} from 'express';
+import {
+	Model, Document, Query, Types, Schema,
+} from 'mongoose';
+import AppController from '@controller/app.controller';
+import { PostModel, IPost, IComment } from '@entity';
+import { logger } from '@utils';
 
 export class PostController<T extends Model<Document>> extends AppController<T> {
-	constructor(model) {
+	public model: T
+
+	constructor(model: T) {
 		super(model);
 		this.addPost = this.addPost.bind(this);
 		this.editPost = this.editPost.bind(this);
@@ -15,39 +21,42 @@ export class PostController<T extends Model<Document>> extends AppController<T> 
 		this.addComment = this.addComment.bind(this);
 	}
 
-	async addComment(post: Types.ObjectId, commentId: Types.ObjectId): Promise<any> {
-		const foundPost = await this.find(post);
+	async addComment(postId: Types.ObjectId, commentId: Schema.Types.ObjectId): Promise<IPost> {
+		const foundPost : IPost = await (this.find(postId).exec() as Promise<IPost>);
 		foundPost.comments.push(commentId);
-		return foundPost.save();
+		const savedPost : IPost = await (foundPost.save());
+		return savedPost;
 	}
 
-	async addPost(req: Request, res: Response, next: NextFunction) {
-		const {title, content, byUser} : IPost = req.body;
+	async addPost(req: Request, res: Response) : Promise<void> {
+		const { title, content, byUser } : IPost = req.body;
 		try {
-			const newPost = await this.add({title, content, byUser} as IPost);
+			const newPost = await this.add({ title, content, byUser } as IPost);
 			res.send(newPost);
-		} catch(e) {
+		} catch (e) {
 			res.send('failure');
 			logger.log('error', e);
 		}
 	}
 
-	async getAllPost(req: Request, res: Response, next: NextFunction) {
+	async getAllPost(req: Request, res: Response) : Promise<void> {
 		try {
 			const posts = await this.find().populate('byUser', 'fullname').populate('comments').exec();
 			res.send(posts);
-		} catch(e) {
+		} catch (e) {
 			res.send('failure');
 			logger.log('error', e);
 		}
 	}
 
-
-	async editPost(req: Request, res: Response, next: NextFunction) {
+	async editPost(req: Request, res: Response) : Promise<void> {
 		try {
-			const {id} = req.params;
-			const {title, content, byUser} = req.body;
-			const modifiedPost:Query<Model<IPost>> = await this.modify(id, {title, content, updated_date: Date.now(), byUser});
+			const { id } = req.params;
+			const { title, content, byUser } = req.body;
+			const modifiedPost = await this.modify(id, {
+				title, content, updated_date: Date.now(), byUser,
+			}) as IPost;
+
 			if (modifiedPost) {
 				res.send(modifiedPost);
 			}
@@ -57,8 +66,8 @@ export class PostController<T extends Model<Document>> extends AppController<T> 
 		}
 	}
 
-	async deletePost(req: Request, res: Response, next: NextFunction) {
-		const {id} = req.params;
+	async deletePost(req: Request, res: Response, next: NextFunction) : Promise<void> {
+		const { id } = req.params;
 		try {
 			const deletedPost = await this.remove(id);
 			if (deletedPost) {
@@ -66,14 +75,14 @@ export class PostController<T extends Model<Document>> extends AppController<T> 
 			} else {
 				res.sendStatus(404);
 			}
-		} catch(e) {
+		} catch (e) {
 			res.send('failure');
 			logger.log('error', e);
 		}
 	}
 
-	async getPost(req: Request, res: Response, next: NextFunction) {
-		const {id} = req.params;
+	async getPost(req: Request, res: Response, next: NextFunction) : Promise<void> {
+		const { id } = req.params;
 		try {
 			const post = await this.find(id);
 			if (post) {
@@ -81,7 +90,7 @@ export class PostController<T extends Model<Document>> extends AppController<T> 
 			} else {
 				res.sendStatus(404);
 			}
-		} catch(e) {
+		} catch (e) {
 			logger.log(e);
 		}
 	}

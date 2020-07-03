@@ -1,31 +1,32 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/* eslint-disable camelcase */
 var mongoose_1 = require("mongoose");
 var PostSchema = new mongoose_1.Schema({
     title: {
-        type: String
+        type: String,
     },
     content: {
-        type: String
+        type: String,
     },
     created_date: {
         type: Date,
-        default: Date.now
+        default: Date.now,
     },
     updated_date: {
         type: Date,
-        default: Date.now
+        default: Date.now,
     },
     liked: {
         type: Number,
-        default: 1
+        default: 1,
     },
     disliked: {
         type: Number,
-        default: 0
+        default: 0,
     },
     byUser: { type: mongoose_1.Schema.Types.ObjectId, ref: 'User' },
-    comments: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'Comment' }]
+    comments: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'Comment' }],
 });
 exports.PostModel = mongoose_1.model('Post', PostSchema);
 //# sourceMappingURL=Post.js.map

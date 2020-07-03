@@ -7,17 +7,17 @@ var CommentSchema = new mongoose_1.Schema({
     comment: String,
     byUser: {
         type: mongoose_1.Types.ObjectId,
-        refer: User_1.UserModel
+        refer: User_1.UserModel,
     },
     liked: {
         type: Number,
-        default: 1
+        default: 1,
     },
     disliked: {
         type: Number,
-        default: 0
+        default: 0,
     },
-    post: { type: mongoose_1.Types.ObjectId, refer: Post_1.PostModel }
+    post: { type: mongoose_1.Types.ObjectId, refer: Post_1.PostModel },
 }, { timestamps: true });
 exports.CommentModel = mongoose_1.model('Comment', CommentSchema);
 //# sourceMappingURL=Comment.js.map

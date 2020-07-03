@@ -85,7 +85,7 @@ var CommentController = /** @class */ (function (_super) {
                         else {
                             throw (this._Error({
                                 statusCode: 500,
-                                m: 'Failed to save comment'
+                                m: 'Failed to save comment',
                             }));
                         }
                         return [3 /*break*/, 5];

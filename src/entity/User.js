@@ -6,22 +6,22 @@ var UserSchema = new mongoose_1.Schema({
     username: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     password: {
-        type: String
+        type: String,
     },
     fullname: {
-        type: String
+        type: String,
     },
     email: {
-        type: String
+        type: String,
     },
     mobile: {
-        type: String
+        type: String,
     },
     posts: [{ type: mongoose_1.Types.ObjectId, ref: Post_1.PostModel }],
-    token: String
+    token: String,
 });
 exports.UserModel = mongoose_1.model('User', UserSchema);
 //# sourceMappingURL=User.js.map
