@@ -25,8 +25,16 @@ var PostSchema = new mongoose_1.Schema({
         type: Number,
         default: 0,
     },
-    byUser: { type: mongoose_1.Schema.Types.ObjectId, ref: 'User' },
-    comments: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'Comment' }],
+    byUser: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'User',
+    },
+    comments: [
+        {
+            type: mongoose_1.Schema.Types.ObjectId,
+            ref: 'Comment',
+        }
+    ],
 });
 exports.PostModel = mongoose_1.model('Post', PostSchema);
 //# sourceMappingURL=Post.js.map

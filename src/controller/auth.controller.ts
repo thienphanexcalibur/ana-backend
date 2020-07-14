@@ -12,7 +12,7 @@ import {
 import { IUser } from '@entity';
 import AppController from '@controller/app.controller';
 
-export class AuthController<T extends Model<Document>> extends AppController<any> {
+export class AuthController extends AppController {
 	public model: Model<Document>
 
 	constructor(model: Model<Document>) {

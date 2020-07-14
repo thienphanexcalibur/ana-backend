@@ -1,13 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = require("mongoose");
-var User_1 = require("./User");
-var Post_1 = require("./Post");
 var CommentSchema = new mongoose_1.Schema({
     comment: String,
     byUser: {
-        type: mongoose_1.Types.ObjectId,
-        refer: User_1.UserModel,
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'User',
     },
     liked: {
         type: Number,
@@ -17,7 +15,15 @@ var CommentSchema = new mongoose_1.Schema({
         type: Number,
         default: 0,
     },
-    post: { type: mongoose_1.Types.ObjectId, refer: Post_1.PostModel },
-}, { timestamps: true });
+    created_date: {
+        type: Date,
+        default: Date.now,
+    },
+    updated_date: {
+        type: Date,
+        default: Date.now,
+    },
+    post: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Post' },
+});
 exports.CommentModel = mongoose_1.model('Comment', CommentSchema);
 //# sourceMappingURL=Comment.js.map

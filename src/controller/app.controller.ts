@@ -1,13 +1,15 @@
 import {
-	Model, Document, Types, DocumentQuery,
+	Model, Document, DocumentQuery, Types,
 } from 'mongoose';
-import { IComment, IUser, IPost } from '@entity';
+import {
+	IComment, IUser, IPost,
+} from '@entity';
 
-declare type I = IComment | IUser | IPost;
-export default class AppController<T extends Model<Document>> {
-	public model: T;
+declare type I = IComment | IUser | IPost | IUser
+export default class AppController {
+	public model: Model<Document>;
 
-	constructor(model: T) {
+	constructor(model: Model<Document>) {
 		this.model = model;
 		this.find = this.find.bind(this);
 		this.add = this.add.bind(this);
@@ -15,7 +17,6 @@ export default class AppController<T extends Model<Document>> {
 	}
 
 	public add(payload: any) : Promise<Document> {
-		// eslint-disable-next-line new-cap
 		const document : Promise<Document> = this.model.create(payload);
 		return document;
 	}

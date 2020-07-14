@@ -30,7 +30,7 @@ const UserSchema : Schema = new Schema({
 	mobile: {
 		type: String,
 	},
-	posts: [{ type: Types.ObjectId, ref: PostModel }],
+	posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
 	token: String,
 });
 export const UserModel:Model<IUser> = model<IUser>('User', UserSchema);

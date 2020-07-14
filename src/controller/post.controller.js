@@ -50,6 +50,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var app_controller_1 = require("@controller/app.controller");
+var _controller_1 = require("@controller");
+var _entity_1 = require("@entity");
 var _utils_1 = require("@utils");
 var PostController = /** @class */ (function (_super) {
     __extends(PostController, _super);
@@ -61,8 +63,10 @@ var PostController = /** @class */ (function (_super) {
         _this.getPost = _this.getPost.bind(_this);
         _this.getAllPost = _this.getAllPost.bind(_this);
         _this.addComment = _this.addComment.bind(_this);
+        _this.userController = new _controller_1.UserController(_entity_1.UserModel);
         return _this;
     }
+    // eslint-disable-next-line max-len
     PostController.prototype.addComment = function (postId, commentId) {
         return __awaiter(this, void 0, void 0, function () {
             var foundPost, savedPost;
@@ -82,37 +86,44 @@ var PostController = /** @class */ (function (_super) {
     };
     PostController.prototype.addPost = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, title, content, byUser, newPost, e_1;
+            var _a, title, content, byUser, newPost, foundUser, e_1;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         _a = req.body, title = _a.title, content = _a.content, byUser = _a.byUser;
                         _b.label = 1;
                     case 1:
-                        _b.trys.push([1, 3, , 4]);
+                        _b.trys.push([1, 5, , 6]);
                         return [4 /*yield*/, this.add({ title: title, content: content, byUser: byUser })];
                     case 2:
                         newPost = _b.sent();
-                        res.send(newPost);
-                        return [3 /*break*/, 4];
+                        return [4 /*yield*/, this.userController.getUser({ _id: byUser })];
                     case 3:
+                        foundUser = _b.sent();
+                        foundUser.posts.push(newPost._id);
+                        return [4 /*yield*/, foundUser.save()];
+                    case 4:
+                        _b.sent();
+                        res.send(newPost);
+                        return [3 /*break*/, 6];
+                    case 5:
                         e_1 = _b.sent();
                         res.send('failure');
                         _utils_1.logger.log('error', e_1);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
+                        return [3 /*break*/, 6];
+                    case 6: return [2 /*return*/];
                 }
             });
         });
     };
-    PostController.prototype.getAllPost = function (res) {
+    PostController.prototype.getAllPost = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var posts, e_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.find().populate('byUser', 'fullname').populate('comments').exec()];
+                        return [4 /*yield*/, this.find().populate('byUser', ['fullname', 'username']).populate('comments').exec()];
                     case 1:
                         posts = _a.sent();
                         res.send(posts);
@@ -195,7 +206,7 @@ var PostController = /** @class */ (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.find(id)];
+                        return [4 /*yield*/, this.find(id).populate('comments').populate('byUser', ['fullname', 'username']).exec()];
                     case 2:
                         post = _a.sent();
                         if (post) {

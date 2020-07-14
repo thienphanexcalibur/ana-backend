@@ -1,17 +1,17 @@
 import { Request, Response, NextFunction } from 'express';
-import { Model, Document } from 'mongoose';
+import { Model, Document, Types } from 'mongoose';
 import AppController from '@controller/app.controller';
 import { PostController } from '@controller';
 import {
 	PostModel, IComment, IUser, IPost,
 } from '@entity';
 
-export class CommentController<T extends Model<Document>> extends AppController<T> {
-	public model : T;
+export class CommentController extends AppController {
+	public model : Model<Document>
 
-	postController: any
+	postController: PostController
 
-	constructor(model: T) {
+	constructor(model: Model<Document>) {
 		super(model);
 		this.addComment = this.addComment.bind(this);
 		this.editComment = this.editComment.bind(this);
@@ -22,8 +22,8 @@ export class CommentController<T extends Model<Document>> extends AppController<
 	async addComment(req: Request, res: Response, next: NextFunction) : Promise<void> {
 		const { comment, byUser, post } : IComment = req.body;
 		try {
-			const newComment: Document = await this.add({ comment, byUser, post } as IComment);
-			const newCommentId: string = newComment._id;
+			const newComment = await this.add({ comment, byUser, post } as IComment) as IComment;
+			const newCommentId : Types.ObjectId = newComment._id;
 			const updatedCommentPost = await this.postController.addComment(post, newCommentId);
 			if (newComment && updatedCommentPost) {
 				res.sendStatus(200).send(newComment);

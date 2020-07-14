@@ -10,8 +10,8 @@ export interface IPost extends Document {
 	updated_date?: number,
 	liked: number,
 	disliked: number,
-	byUser: Schema.Types.ObjectId,
-	comments?: Schema.Types.ObjectId[]
+	byUser: Types.ObjectId,
+	comments?: Types.ObjectId[]
 }
 const PostSchema : Schema = new Schema({
 	title: {
@@ -36,7 +36,14 @@ const PostSchema : Schema = new Schema({
 		type: Number,
 		default: 0,
 	},
-	byUser: { type: Schema.Types.ObjectId, ref: 'User' },
-	comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+	byUser: {
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+	},
+	comments: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Comment',
+		}],
 });
 export const PostModel:Model<IPost> = model<IPost>('Post', PostSchema);

@@ -6,5 +6,5 @@ var _entity_1 = require("@entity");
 var router = express_1.Router();
 exports.router = router;
 var commentController = new _controller_1.CommentController(_entity_1.CommentModel);
-router.route('/').post(commentController.addComment);
+router.route('/add').post(commentController.addComment);
 //# sourceMappingURL=comment.js.map

@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = require("mongoose");
-var Post_1 = require("./Post");
 var UserSchema = new mongoose_1.Schema({
     username: {
         type: String,
@@ -20,7 +19,7 @@ var UserSchema = new mongoose_1.Schema({
     mobile: {
         type: String,
     },
-    posts: [{ type: mongoose_1.Types.ObjectId, ref: Post_1.PostModel }],
+    posts: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'Post' }],
     token: String,
 });
 exports.UserModel = mongoose_1.model('User', UserSchema);
