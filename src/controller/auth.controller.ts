@@ -79,7 +79,7 @@ export class AuthController extends AppController {
 			if (user && result) {
 				res.send(user);
 			} else {
-				res.sendStatus(404);
+				res.send({});
 			}
 		} catch (e) {
 			res.sendStatus(500);

@@ -26,7 +26,7 @@ export class CommentController extends AppController {
 			const newCommentId : Types.ObjectId = newComment._id;
 			const updatedCommentPost = await this.postController.addComment(post, newCommentId);
 			if (newComment && updatedCommentPost) {
-				res.sendStatus(200).send(newComment);
+				res.send(newComment);
 			} else {
 				throw (this._Error({
 					statusCode: 500,

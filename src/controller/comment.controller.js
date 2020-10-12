@@ -80,7 +80,7 @@ var CommentController = /** @class */ (function (_super) {
                     case 3:
                         updatedCommentPost = _b.sent();
                         if (newComment && updatedCommentPost) {
-                            res.sendStatus(200).send(newComment);
+                            res.send(newComment);
                         }
                         else {
                             throw (this._Error({
