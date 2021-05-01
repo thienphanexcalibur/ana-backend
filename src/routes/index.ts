@@ -1,8 +1,13 @@
-import { AuthMiddleware, PostMiddleware, CommentMiddleware } from '@middlewares';
+import { Express } from "express";
+import {
+  AuthMiddleware,
+  PostMiddleware,
+  CommentMiddleware,
+} from "@middlewares";
 
-function routes(app) : void {
-	app.use('/auth', AuthMiddleware);
-	app.use('/post', PostMiddleware);
-	app.use('/comment', CommentMiddleware);
+function routes(app: Express): void {
+  app.use("/auth", AuthMiddleware);
+  app.use("/post", PostMiddleware);
+  app.use("/comment", CommentMiddleware);
 }
 export default routes;

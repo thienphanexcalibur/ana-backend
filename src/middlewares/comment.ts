@@ -1,10 +1,10 @@
-import { Router } from 'express';
-import { CommentController } from '@controller';
-import { CommentModel } from '@entity';
+import { Router } from "express";
+import { CommentController } from "@controller";
+import { CommentModel } from "@entity";
 
-const router:any = Router();
+const router: any = Router();
 const commentController = new CommentController(CommentModel);
 
-router.route('/add').post(commentController.addComment);
+router.route("/add").post(commentController.addComment);
 
 export { router };

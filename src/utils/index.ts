@@ -1,13 +1,16 @@
-import {hash as bcryptHash, compare as bcryptCompare} from 'bcrypt';
-import { Types } from 'mongoose';
-import {promisify} from 'util';
-import {sign, verify} from 'jsonwebtoken';
-const fs = require('fs');
-const path = require('path');
+import { hash as bcryptHash, compare as bcryptCompare } from "bcryptjs";
+import { Types } from "mongoose";
+import { promisify } from "util";
+import { sign, verify } from "jsonwebtoken";
+
+const fs = require("fs");
+const path = require("path");
 
 // Read private key file to retrieve the Buffer, using as our secret key
 declare const Buffer;
-const secret: Buffer = fs.readFileSync(path.resolve(__dirname, '../../private.pem'));
+const secret: Buffer = fs.readFileSync(
+  path.resolve(__dirname, "../../private.pem")
+);
 
 /*
  * Generate hash
@@ -15,8 +18,8 @@ const secret: Buffer = fs.readFileSync(path.resolve(__dirname, '../../private.pe
  * @param {Number} salt
  * @return Promise<String>
  */
-export function _hash(s: string, salt = 12) : Promise<string> {
-	return promisify(bcryptHash)(s, salt);
+export function _hash(s: string, salt = 12): Promise<string> {
+  return promisify(bcryptHash)(s, salt);
 }
 
 /**
@@ -25,13 +28,13 @@ export function _hash(s: string, salt = 12) : Promise<string> {
  * @param {String} s2
  * @return Promise<boolean>
  */
-export function _hashCompare(s1: string, hash: string) : Promise<boolean> {
-	return promisify(bcryptCompare)(s1, hash);
+export function _hashCompare(s1: string, hash: string): Promise<boolean> {
+  return promisify(bcryptCompare)(s1, hash);
 }
 
 interface PayloadAuth extends Object {
-	id: Types.ObjectId
-};
+  id: Types.ObjectId;
+}
 
 /**
  * Generate auth token
@@ -39,17 +42,17 @@ interface PayloadAuth extends Object {
  * @param {String} secretKey
  * @return string
  */
-export function generateToken(payload: PayloadAuth) : string {
-	return sign(payload, secret);
+export function generateToken(payload: PayloadAuth): string {
+  return sign(payload, secret);
 }
 
-export function verifyToken(token: string) : any {
-	try {
-		let decoded:any = verify(token, secret);
-		return decoded;
-	} catch(e) {
-		return false as any;
-	}
+export function verifyToken(token: string): any {
+  try {
+    const decoded: any = verify(token, secret);
+    return decoded;
+  } catch (e) {
+    return false as any;
+  }
 }
 
-export {logger} from './log';
+export { logger } from "./log";
