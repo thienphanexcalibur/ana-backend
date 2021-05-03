@@ -1,15 +1,11 @@
-import express, {
-  Request,
-  Response,
-  NextFunction,
-  urlencoded,
-  json,
-} from "express";
-import mongoose from "mongoose";
+import { watch } from "chokidar";
+import express, { Request, Response, NextFunction, urlencoded, json } from "express";
+import mongoose, { Connection } from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import routes from "@routes";
 import { logger } from "@utils";
+
 
 const { SERVER_PORT, DB_HOST, DB_PORT, DB_ROOT } = process.env;
 
@@ -25,7 +21,7 @@ mongoose
     pass: "admin",
   })
   .catch((e) => console.log(e));
-const db: mongoose.Connection = mongoose.connection;
+const db: Connection = mongoose.connection;
 
 app.use(
   cors({
@@ -50,6 +46,18 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 routes(app);
+
+const watcher = watch('./src')
+watcher.on('ready', function() {
+  watcher.on('all', function() {
+    console.log("Clearing /dist/ module cache from server")
+    Object.keys(require.cache).forEach(function(id) {
+      console.log(id);
+      if (/[\/\\]src[\/\\]/.test(id)) delete require.cache[id]
+    })
+  })
+})
+
 // start express server
 app.listen(SERVER_PORT, () => {
   db.once("open", async () => {
@@ -60,3 +68,5 @@ app.listen(SERVER_PORT, () => {
   });
   console.log("Server is up at ", SERVER_PORT);
 });
+
+

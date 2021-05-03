@@ -2,6 +2,7 @@ import { Model, Document, DocumentQuery, Types } from "mongoose";
 import { IComment, IUser, IPost } from "@entity";
 
 declare type I = IComment | IUser | IPost | IUser;
+
 export default class AppController {
   public model: Model<Document>;
 

@@ -10,37 +10,31 @@
 		"outDir": "dist",
 		"baseUrl": ".",
 		"paths": {
-			"root": [
-				"./"
-			],
 			"@": [
-				"./src"
+				"./src/*"
 			],
 			"@routes": [
-				"./src/routes"
+				"./src/routes",
+				"./src/routes/*"
 			],
-			"@routes/*": ["./src/*"],
 			"@controller": [
-				"./src/controller"
-			],
-			"@controller/*": [
-				"./src/controller/*"
+				"./src/controller", "./src/controller/*"
 			],
 			"@middlewares": [
-				"./src/middlewares"
-			],
-			"@middlewares/*": [
 				"./src/middlewares/*"
 			],
 			"@entity": [
-				"./src/entity"
-			],
-			"@utils/*": [
-				"./src/utils/*"
+				"./src/entity",
+				"./src/entity/*"
 			],
 			"@utils": [
-				"./src/utils"
+				"./src/utils/*"
 			]
 		}
-	}
+	},
+	"include": [
+		"src/**/*.*.ts",
+		"src/**/*.ts"
+	],
+	"exclude": ["node_modules"]
 }

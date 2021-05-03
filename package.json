@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env mode=DEVELOPMENT nodemon -r ./babelRegister.js src/app.ts",
+    "dev": "cross-env mode=DEVELOPMENT nodemon -r ./babelRegister.js server.ts",
     "prod": "cross-env mode=PRODUCTION node -r ./babelRegister.js src/app.ts",
     "lint": "eslint --cache --quiet ./src/**/*.ts",
     "lint:fix": "prettier-eslint --write $PWD/'src/**/*.[jt]s?(x)'",
@@ -25,6 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "body-parser": "^1.19.0",
+    "chokidar": "^3.5.1",
     "cookie-parser": "^1.4.5",
     "cross-env": "^7.0.0",
     "dotenv": "^8.2.0",

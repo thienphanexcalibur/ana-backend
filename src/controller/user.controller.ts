@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-constructor */
 import { Model, Document, Types } from "mongoose";
-import AppController from "@controller/app.controller";
+import { AppController } from "@controller";
 import { IUser } from "@entity";
 
 export class UserController extends AppController {

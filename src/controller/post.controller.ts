@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { Model, Document, Types } from "mongoose";
-import AppController from "@controller/app.controller";
-import { UserController } from "@controller";
+import { AppController, UserController } from "@controller";
 import { IPost, IUser, UserModel } from "@entity";
 import { logger } from "@utils";
 

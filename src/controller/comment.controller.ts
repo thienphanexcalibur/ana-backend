@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { Model, Document, Types } from "mongoose";
-import AppController from "@controller/app.controller";
-import { PostController } from "@controller";
+import { AppController, PostController } from "@controller";
 import { PostModel, IComment, IUser, IPost } from "@entity";
 
 export class CommentController extends AppController {

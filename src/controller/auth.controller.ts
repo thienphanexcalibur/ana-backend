@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import { _hash, _hashCompare, generateToken, verifyToken } from "@utils";
 import { Model, Document, Types } from "mongoose";
 import { IUser } from "@entity";
-import AppController from "@controller/app.controller";
+import { AppController } from "@controller";
 
 export class AuthController extends AppController {
   public model: Model<Document>;
