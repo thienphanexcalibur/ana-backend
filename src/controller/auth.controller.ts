@@ -16,9 +16,7 @@ export class AuthController extends AppController {
 
   async signup(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { username, password, email, fullname, mobile }: IUser = req.body;
-
     const encryptedPwd: string = await _hash(password);
-
     try {
       const user = (await this.add({
         username,
@@ -35,9 +33,14 @@ export class AuthController extends AppController {
         .send(user);
       next();
     } catch (e) {
-      res.sendStatus(500);
+      res.status(500).send(e);
       next(e);
     }
+  }
+
+  logout(req: Request, res: Response, next: NextFunction) {
+    res.status(200).cookie("auth", "").send("Log out successfully");
+    next();
   }
 
   async auth(req: Request, res: Response, next: NextFunction): Promise<void> {

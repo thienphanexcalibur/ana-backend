@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from "express";
-import { Model, Document, Types } from "mongoose";
 import { AppController, PostController } from "@controller";
-import { PostModel, IComment, IUser, IPost } from "@entity";
+import { IComment, IPost, IUser, PostModel } from "@entity";
+import { NextFunction, Request, Response } from "express";
+import { Document, Model, Types } from "mongoose";
 
 export class CommentController extends AppController {
   public model: Model<Document>;
@@ -61,7 +61,7 @@ export class CommentController extends AppController {
         updated_date: Date.now(),
       });
       if (modifiedPost) {
-        res.sendStatus(200).send(modifiedPost);
+        res.status(200).send(modifiedPost);
       }
     } catch (e) {
       next(e);
@@ -95,7 +95,7 @@ export class CommentController extends AppController {
     try {
       const post = (await this.find(id)) as IUser[];
       if (post) {
-        res.sendStatus(200).send(post);
+        res.send(post);
       } else {
         res.sendStatus(404);
       }

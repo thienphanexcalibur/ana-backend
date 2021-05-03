@@ -5,6 +5,6 @@ import { CommentModel } from "@entity";
 const router: Router = Router();
 const commentController = new CommentController(CommentModel);
 
-router.route("/add").post(commentController.addComment);
+router.post("/add", commentController.addComment);
 
 export { router };

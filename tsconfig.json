@@ -7,10 +7,12 @@
 		"moduleResolution": "node",
 		"allowSyntheticDefaultImports": true,
 		"sourceMap": true,
-		"outDir": "dist",
 		"baseUrl": ".",
 		"paths": {
 			"@": [
+				"./src"
+			],
+			"@/*": [
 				"./src/*"
 			],
 			"@routes": [
@@ -18,7 +20,10 @@
 				"./src/routes/*"
 			],
 			"@controller": [
-				"./src/controller", "./src/controller/*"
+				"./src/controller"
+			],
+			"@controller/*": [
+				"./src/controller/*"
 			],
 			"@middlewares": [
 				"./src/middlewares/*"

@@ -1,13 +1,11 @@
+import fs from "fs";
+import path from "path";
 import { hash as bcryptHash, compare as bcryptCompare } from "bcryptjs";
 import { Types } from "mongoose";
 import { promisify } from "util";
 import { sign, verify } from "jsonwebtoken";
 
-const fs = require("fs");
-const path = require("path");
-
 // Read private key file to retrieve the Buffer, using as our secret key
-declare const Buffer;
 const secret: Buffer = fs.readFileSync(
   path.resolve(__dirname, "../../private.pem")
 );
