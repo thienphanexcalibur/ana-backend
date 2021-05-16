@@ -1,9 +1,9 @@
 // Middlewares
-import { Router, IRouter } from "express";
+import { Router } from "express";
 import { AuthController } from "@controller";
 import { UserModel } from "@entity";
 
-const router: IRouter = Router();
+const router: Router = Router();
 const authController: AuthController = new AuthController(UserModel);
 
 router.post("/signup", authController.signup);

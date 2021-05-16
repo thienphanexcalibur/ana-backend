@@ -1,7 +1,7 @@
 // Authentication Controller
 import { Request, Response, NextFunction } from "express";
 import { _hash, _hashCompare, generateToken, verifyToken } from "@utils";
-import { Model, Document, Types } from "mongoose";
+import { Model, Document, Types, ObjectId, Query } from "mongoose";
 import { IUser } from "@entity";
 import { AppController } from "@controller";
 
@@ -16,20 +16,18 @@ export class AuthController extends AppController {
 
   async signup(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { username, password, email, fullname, mobile }: IUser = req.body;
-    const encryptedPwd: string = await _hash(password);
     try {
-      const user = (await this.add({
+      const encryptedPwd = await _hash(password);
+      const user = await this.model.create({
         username,
         password: encryptedPwd,
-        email,
-        fullname,
-        mobile,
-      } as IUser)) as IUser;
+      });
       const token = generateToken({ id: user._id });
       user.token = token;
       await user.save();
       res
         .cookie("auth", token, { maxAge: 2147483647, httpOnly: true })
+        .status(200)
         .send(user);
       next();
     } catch (e) {
@@ -47,32 +45,33 @@ export class AuthController extends AppController {
     try {
       const { username, password }: IUser = req.body;
       const { auth } = req.cookies;
-      let userId: Types.ObjectId;
       let user: IUser;
       let result: boolean;
 
       if (auth) {
-        userId = verifyToken(auth).id;
-        user = (await this.find(
-          userId,
-          "username fullname email mobile"
-        )) as IUser;
-        if (user) {
-          result = true;
+        const userId: ObjectId = verifyToken(auth).id;
+        if (userId) {
+          user = await this.model.findById(userId);
+          if (user) {
+            result = true;
+          }
         }
       }
 
       if (username && password) {
-        user = (await this.find({ username } as IUser)) as IUser;
+        user = await this.model.findOne({ username });
         if (user) {
           result = await _hashCompare(password, user.password);
         }
       }
 
       if (user && result) {
-        res.send(user);
+        res
+          .cookie("auth", user.token, { maxAge: 2147483647, httpOnly: true })
+          .status(200)
+          .send(user);
       } else {
-        res.send({});
+        res.status(200).send({});
       }
     } catch (e) {
       res.sendStatus(500);

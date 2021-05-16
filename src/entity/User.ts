@@ -8,7 +8,7 @@ export interface IUser extends Document {
   email?: string;
   mobile?: string;
   posts?: string[];
-  token: string;
+  token?: string;
 }
 const UserSchema: Schema = new Schema({
   username: {

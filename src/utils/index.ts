@@ -16,7 +16,7 @@ const secret: Buffer = fs.readFileSync(
  * @param {Number} salt
  * @return Promise<String>
  */
-export function _hash(s: string, salt = 12): Promise<string> {
+export async function _hash(s: string, salt = 12): Promise<string> {
   return promisify(bcryptHash)(s, salt);
 }
 

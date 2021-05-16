@@ -7,11 +7,7 @@ import express, {
 	json,
 } from "express";
 import mongoose, { Connection } from "mongoose";
-import cors from "cors";
-import cookieParser from "cookie-parser";
 import routes from "@routes";
-//import reload from 'express-reload';
-import { logger } from "@utils";
 
 const { SERVER_PORT, DB_HOST, DB_PORT, DB_ROOT } = process.env;
 
@@ -29,16 +25,6 @@ mongoose
 	})
 	.catch((e) => console.log(e));
 const db: Connection = mongoose.connection;
-
-app.use(
-	cors({
-		origin: ["http://localhost:6900"],
-		credentials: true,
-	})
-);
-app.use(json());
-app.use(urlencoded({ extended: true }));
-app.use(cookieParser());
 
 routes(app);
 // start express server
