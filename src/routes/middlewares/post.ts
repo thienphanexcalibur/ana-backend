@@ -1,15 +1,23 @@
 // Middlewares
 import { Router } from 'express';
-import { PostController } from '@controller';
-import { PostModel } from '@entity';
+import { AuthController, PostController } from '@controller';
+import { PostModel, UserModel } from '@entity';
 
-const router: any = Router();
+const router: Router = Router();
 
 const postController = new PostController(PostModel);
 
-router.get('/', postController.getAllPost);
-router.route('/:id').get(postController.getPost).delete(postController.deletePost);
-router.post('/add', postController.addPost);
-router.post('/modify/:id', postController.editPost);
+const authController = new AuthController(UserModel);
+
+// router.use(authController.verifyAuth);
+
+router
+	.route('/:id')
+	.get(postController.getPost)
+	.delete(postController.addPost, postController.deletePost);
+
+router.post('/add', authController.verifyAuth, postController.addPost);
+
+router.post('/modify/:id', authController.verifyAuth, postController.editPost);
 
 export default router;

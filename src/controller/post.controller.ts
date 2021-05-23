@@ -1,13 +1,11 @@
-import { Request, Response } from 'express';
-import { Model, Document, Types } from 'mongoose';
-import { AppController, UserController } from '@controller';
-import { IPost, IUser, UserModel } from '@entity';
+import { NextFunction, Request, Response } from 'express';
+import { Model, Document } from 'mongoose';
+import { AppController } from '@controller';
+import { IPost, PostModel, UserModel } from '@entity';
 import { logger } from '@utils';
 
 export default class PostController extends AppController {
 	public model: Model<Document>;
-
-	private userController: UserController;
 
 	constructor(model: Model<Document>) {
 		super(model);
@@ -16,43 +14,43 @@ export default class PostController extends AppController {
 		this.deletePost = this.deletePost.bind(this);
 		this.getPost = this.getPost.bind(this);
 		this.getAllPost = this.getAllPost.bind(this);
-		this.addComment = this.addComment.bind(this);
-		this.userController = new UserController(UserModel);
 	}
 
-	// eslint-disable-next-line max-len
-	async addComment(postId: Types.ObjectId, commentId: Types.ObjectId): Promise<IPost> {
-		const foundPost: IPost = await (this.find(postId).exec() as Promise<IPost>);
-		foundPost.comments.push(commentId);
-		const savedPost: IPost = await foundPost.save();
-		return savedPost;
-	}
-
-	async addPost(req: Request, res: Response): Promise<void> {
-		const { title, content, byUser }: IPost = req.body;
+	async addPost(req: Request, res: Response, next: NextFunction): Promise<void> {
+		const { title, content, byUser }: IPost = res.locals.body;
 		try {
-			const newPost = await this.add({ title, content, byUser } as IPost);
+			const newPost = await this.model.create({ title, content, byUser } as IPost);
 			// Append new post into current user
-			const foundUser = await this.userController.getUser({ _id: byUser });
+			const foundUser = await UserModel.findById(byUser);
 			foundUser.posts.push(newPost._id);
 			await foundUser.save();
-			res.send(newPost);
+			res.status(200).send(newPost);
+			next();
 		} catch (e) {
-			res.send('failure');
-			logger.log('error', e);
+			res.status(500).send(e.message);
+			logger.log('error', {
+				message: e.message,
+				stack: e.stack
+			});
 		}
 	}
 
-	async getAllPost(req: Request, res: Response): Promise<void> {
+	async getAllPost(req: Request, res: Response, next: NextFunction): Promise<void> {
 		try {
-			const posts = await this.find()
+			const posts = await PostModel.find()
 				.populate('byUser', ['fullname', 'username'])
 				.populate('comments')
-				.exec();
+				.sort({
+					created_date: -1
+				});
 			res.send(posts);
+			next();
 		} catch (e) {
-			res.send('failure');
-			logger.log('error', e);
+			res.status(500).send(e.message);
+			logger.log('error', {
+				message: e.message,
+				stack: e.stack
+			});
 		}
 	}
 
@@ -71,8 +69,11 @@ export default class PostController extends AppController {
 				res.send(modifiedPost);
 			}
 		} catch (e) {
-			res.send('failure');
-			logger.log('error', e);
+			res.status(500).send(e.message);
+			logger.log('error', {
+				message: e.message,
+				stack: e.stack
+			});
 		}
 	}
 
@@ -81,30 +82,39 @@ export default class PostController extends AppController {
 		try {
 			const deletedPost = (await this.remove(id)) as IPost;
 			if (deletedPost) {
-				res.send('success');
+				res.status(200);
 			} else {
-				res.sendStatus(404);
+				res.status(404).send({
+					message: 'Post does not exist'
+				});
 			}
 		} catch (e) {
-			res.send('failure');
-			logger.log('error', e);
+			res.status(500).send(e.message);
+			logger.log('error', {
+				message: e.message,
+				stack: e.stack
+			});
 		}
 	}
 
-	async getPost(req: Request, res: Response): Promise<void> {
+	async getPost(req: Request, res: Response, next: NextFunction): Promise<void> {
 		const { id } = req.params;
 		try {
-			const post = await this.find(id)
-				.populate('comments')
-				.populate('byUser', ['fullname', 'username'])
-				.exec();
+			const post = await PostModel.findById(id, '-comments');
 			if (post) {
 				res.send(post);
 			} else {
-				res.sendStatus(404);
+				res.sendStatus(404).send({
+					message: 'Post does not exist'
+				});
 			}
+			next();
 		} catch (e) {
-			logger.log(e);
+			res.status(500).send(e.message);
+			logger.log('error', {
+				message: e.message,
+				stack: e.stack
+			});
 		}
 	}
 }

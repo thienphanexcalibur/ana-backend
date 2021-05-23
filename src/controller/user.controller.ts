@@ -11,7 +11,7 @@ export default class UserController extends AppController {
 	}
 
 	async getUser({ _id }: { _id: Types.ObjectId }): Promise<IUser> {
-		const user = (await this.find(_id)) as IUser;
+		const user = (await this.model.findById(_id)) as IUser;
 		return user;
 	}
 }

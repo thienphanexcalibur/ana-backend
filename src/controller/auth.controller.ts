@@ -12,6 +12,7 @@ export default class AuthController extends AppController {
 		super(model);
 		this.auth = this.auth.bind(this);
 		this.signup = this.signup.bind(this);
+		this.verifyAuth = this.verifyAuth.bind(this);
 	}
 
 	async signup(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -36,6 +37,32 @@ export default class AuthController extends AppController {
 	logout(req: Request, res: Response, next: NextFunction) {
 		res.status(200).cookie('auth', '').send('Log out successfully');
 		next();
+	}
+
+	verifyAuth(req: Request, res: Response, next: NextFunction) {
+		const { auth } = req.cookies;
+		let result = false;
+		try {
+			if (auth) {
+				const userId: ObjectId = verifyToken(auth).id;
+				if (userId) {
+					// const user = await this.model.findById(userId);
+					// if (user) {
+					result = true;
+					// }
+				}
+			}
+			if (result) {
+				res.locals.body = req.body;
+				next();
+			} else {
+				res.status(401).send({
+					message: 'Unauthorized'
+				});
+			}
+		} catch (e) {
+			res.status(500).send(e);
+		}
 	}
 
 	async auth(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -68,10 +95,11 @@ export default class AuthController extends AppController {
 					.status(200)
 					.send(user);
 			} else {
-				res.status(200).send({});
+				res.status(200).send(user);
 			}
+			next();
 		} catch (e) {
-			res.sendStatus(500);
+			res.status(500).send(e);
 			next(e);
 		}
 	}

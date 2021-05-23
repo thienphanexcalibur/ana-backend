@@ -1,41 +1,38 @@
-import { AppController, PostController } from '@controller';
-import { IComment, IPost, IUser, PostModel } from '@entity';
+import { logger } from '@/utils';
+import { AppController } from '@controller';
+import { CommentModel, IComment, IPost, IUser, PostModel } from '@entity';
 import { NextFunction, Request, Response } from 'express';
-import { Document, Model, Types } from 'mongoose';
+import { Document, Model } from 'mongoose';
 
 export default class CommentController extends AppController {
 	public model: Model<Document>;
-
-	postController: PostController;
 
 	constructor(model: Model<Document>) {
 		super(model);
 		this.addComment = this.addComment.bind(this);
 		this.editComment = this.editComment.bind(this);
 		this.deleteComment = this.deleteComment.bind(this);
-		this.postController = new PostController(PostModel);
 	}
 
 	async addComment(req: Request, res: Response, next: NextFunction): Promise<void> {
-		const { comment, byUser, post }: IComment = req.body;
+		const { comment, byUser, post: postId }: IComment = res.locals.body;
 		try {
-			const newComment = (await this.add({
+			const newComment = (await CommentModel.create({
 				comment,
 				byUser,
-				post
+				post: postId
 			} as IComment)) as IComment;
-			const newCommentId: Types.ObjectId = newComment._id;
-			const updatedCommentPost = await this.postController.addComment(post, newCommentId);
-			if (newComment && updatedCommentPost) {
-				res.send(newComment);
-			} else {
-				throw this._Error({
-					statusCode: 500,
-					m: 'Failed to save comment'
-				});
-			}
+			const foundPost = await PostModel.findById(postId);
+			foundPost.comments.push(newComment._id);
+			await foundPost.save();
+			res.status(200).send(newComment);
+			next();
 		} catch (e) {
-			next(e);
+			res.status(500).send(e.message);
+			logger.log('error', {
+				message: e.message,
+				stack: e.stack
+			});
 		}
 	}
 
@@ -71,17 +68,31 @@ export default class CommentController extends AppController {
 		}
 	}
 
-	async getPost(req: Request, res: Response, next: NextFunction): Promise<void> {
+	async getComments(req: Request, res: Response, next: NextFunction): Promise<void> {
 		const { id } = req.params;
 		try {
-			const post = (await this.find(id)) as IUser[];
-			if (post) {
-				res.send(post);
-			} else {
-				res.sendStatus(404);
-			}
+			const comments = await PostModel.findById(id, 'comments -_id').populate({
+				path: 'comments',
+				select: '-post',
+				options: {
+					sort: {
+						created_date: -1
+					}
+				},
+				populate: {
+					model: 'User',
+					path: 'byUser',
+					select: 'username _id'
+				}
+			});
+			res.status(200).send(comments.comments);
+			next();
 		} catch (e) {
-			next(e);
+			res.status(500).send(e.message);
+			logger.log('error', {
+				message: e.message,
+				stack: e.stack
+			});
 		}
 	}
 }

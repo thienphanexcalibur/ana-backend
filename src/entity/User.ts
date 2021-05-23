@@ -7,7 +7,7 @@ export interface IUser extends Document {
 	fullname?: string;
 	email?: string;
 	mobile?: string;
-	posts?: string[];
+	posts?: Schema.Types.ObjectId[];
 	token?: string;
 }
 const UserSchema: Schema = new Schema({
