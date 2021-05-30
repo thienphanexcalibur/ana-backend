@@ -117,4 +117,23 @@ export default class PostController extends AppController {
 			});
 		}
 	}
+
+	async interact(req: Request, res: Response, next: NextFunction): Promise<void> {
+		const { postId, liked = 0, disliked = 0 } = req.body;
+
+		try {
+			const post = await PostModel.findById(postId);
+			post.liked += liked;
+			post.disliked += disliked;
+			await post.save();
+			res.status(200).send(post);
+			next();
+		} catch (e) {
+			res.status(500).send(e.message);
+			logger.log('error', {
+				message: e.message,
+				stack: e.stack
+			});
+		}
+	}
 }

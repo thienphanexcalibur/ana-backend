@@ -20,4 +20,6 @@ router.post('/add', authController.verifyAuth, postController.addPost);
 
 router.post('/modify/:id', authController.verifyAuth, postController.editPost);
 
+router.put('/interact', authController.verifyAuth, postController.interact);
+
 export default router;

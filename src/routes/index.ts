@@ -17,7 +17,7 @@ import { AuthMiddleware, PostMiddleware, CommentMiddleware, PostsMiddleware } fr
 function routes(app: Express): void {
 	app.use(
 		cors({
-			origin: ['http://localhost:6900'],
+			origin: ['http://localhost:6900', /ngrok/],
 			credentials: true
 		})
 	);
@@ -39,7 +39,7 @@ function routes(app: Express): void {
 	app.use(urlencoded({ extended: true }));
 	app.use(cookieParser());
 
-	app.use('/auth', AuthMiddleware);
+	app.use('/user', AuthMiddleware);
 	app.use('/post', PostMiddleware);
 	app.use('/posts', PostsMiddleware);
 	app.use('/comment', CommentMiddleware);
