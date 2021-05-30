@@ -1,6 +1,6 @@
 // Authentication Controller
 import { AppController } from '@controller';
-import { IUser } from '@entity';
+import { IUser, UserModel } from '@entity';
 import { generateToken, verifyToken, _hash, _hashCompare } from '@utils';
 import { NextFunction, Request, Response } from 'express';
 import { Document, Model, ObjectId } from 'mongoose';
@@ -16,10 +16,10 @@ export default class AuthController extends AppController {
 	}
 
 	async signup(req: Request, res: Response, next: NextFunction): Promise<void> {
-		const { username, password, email, fullname, mobile }: IUser = req.body;
+		const { username, password }: IUser = req.body;
 		try {
 			const encryptedPwd = await _hash(password);
-			const user = await this.model.create({
+			const user = await UserModel.create({
 				username,
 				password: encryptedPwd
 			});
@@ -29,14 +29,12 @@ export default class AuthController extends AppController {
 			res.cookie('auth', token, { maxAge: 2147483647, httpOnly: true }).status(200).send(user);
 			next();
 		} catch (e) {
-			res.status(500).send(e);
 			next(e);
 		}
 	}
 
-	logout(req: Request, res: Response, next: NextFunction) {
+	logout(req: Request, res: Response) {
 		res.status(200).cookie('auth', '').send('Log out successfully');
-		next();
 	}
 
 	verifyAuth(req: Request, res: Response, next: NextFunction) {
@@ -46,10 +44,7 @@ export default class AuthController extends AppController {
 			if (auth) {
 				const userId: ObjectId = verifyToken(auth).id;
 				if (userId) {
-					// const user = await this.model.findById(userId);
-					// if (user) {
 					result = true;
-					// }
 				}
 			}
 			if (result) {
@@ -61,7 +56,7 @@ export default class AuthController extends AppController {
 				});
 			}
 		} catch (e) {
-			res.status(500).send(e);
+			next(e);
 		}
 	}
 
@@ -75,7 +70,7 @@ export default class AuthController extends AppController {
 			if (auth) {
 				const userId: ObjectId = verifyToken(auth).id;
 				if (userId) {
-					user = await this.model.findById(userId);
+					user = await UserModel.findById(userId);
 					if (user) {
 						result = true;
 					}
@@ -83,7 +78,7 @@ export default class AuthController extends AppController {
 			}
 
 			if (username && password) {
-				user = await this.model.findOne({ username });
+				user = await UserModel.findOne({ username });
 				if (user) {
 					result = await _hashCompare(password, user.password);
 				}
@@ -99,7 +94,6 @@ export default class AuthController extends AppController {
 			}
 			next();
 		} catch (e) {
-			res.status(500).send(e);
 			next(e);
 		}
 	}

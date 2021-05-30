@@ -27,14 +27,6 @@ function routes(app: Express): void {
 		next();
 	});
 
-	app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-		if (err) {
-			res.status(err.statusCode || 500).send(err || err.m);
-			logger.log('error', err);
-		}
-		next();
-	});
-
 	app.use(json());
 	app.use(urlencoded({ extended: true }));
 	app.use(cookieParser());
@@ -43,5 +35,15 @@ function routes(app: Express): void {
 	app.use('/post', PostMiddleware);
 	app.use('/posts', PostsMiddleware);
 	app.use('/comment', CommentMiddleware);
+	app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+		res.status(500).send({
+			message: err.message
+		});
+		logger.log('error', {
+			message: err.message,
+			stack: err.stack
+		});
+		next();
+	});
 }
 export default routes;

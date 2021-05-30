@@ -28,11 +28,7 @@ export default class CommentController extends AppController {
 			res.status(200).send(newComment);
 			next();
 		} catch (e) {
-			res.status(500).send(e.message);
-			logger.log('error', {
-				message: e.message,
-				stack: e.stack
-			});
+			next(e);
 		}
 	}
 
@@ -88,11 +84,7 @@ export default class CommentController extends AppController {
 			res.status(200).send(comments.comments);
 			next();
 		} catch (e) {
-			res.status(500).send(e.message);
-			logger.log('error', {
-				message: e.message,
-				stack: e.stack
-			});
+			next(e);
 		}
 	}
 }

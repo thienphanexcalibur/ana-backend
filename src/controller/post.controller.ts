@@ -27,11 +27,7 @@ export default class PostController extends AppController {
 			res.status(200).send(newPost);
 			next();
 		} catch (e) {
-			res.status(500).send(e.message);
-			logger.log('error', {
-				message: e.message,
-				stack: e.stack
-			});
+			next(e);
 		}
 	}
 
@@ -46,11 +42,7 @@ export default class PostController extends AppController {
 			res.send(posts);
 			next();
 		} catch (e) {
-			res.status(500).send(e.message);
-			logger.log('error', {
-				message: e.message,
-				stack: e.stack
-			});
+			next(e);
 		}
 	}
 
@@ -69,15 +61,11 @@ export default class PostController extends AppController {
 				res.send(modifiedPost);
 			}
 		} catch (e) {
-			res.status(500).send(e.message);
-			logger.log('error', {
-				message: e.message,
-				stack: e.stack
-			});
+			next(e);
 		}
 	}
 
-	async deletePost(req: Request, res: Response): Promise<void> {
+	async deletePost(req: Request, res: Response, next: NextFunction): Promise<void> {
 		const { id } = req.params;
 		try {
 			const deletedPost = (await this.remove(id)) as IPost;
@@ -89,11 +77,7 @@ export default class PostController extends AppController {
 				});
 			}
 		} catch (e) {
-			res.status(500).send(e.message);
-			logger.log('error', {
-				message: e.message,
-				stack: e.stack
-			});
+			next(e);
 		}
 	}
 
@@ -110,11 +94,7 @@ export default class PostController extends AppController {
 			}
 			next();
 		} catch (e) {
-			res.status(500).send(e.message);
-			logger.log('error', {
-				message: e.message,
-				stack: e.stack
-			});
+			next(e);
 		}
 	}
 
@@ -129,11 +109,7 @@ export default class PostController extends AppController {
 			res.status(200).send(post);
 			next();
 		} catch (e) {
-			res.status(500).send(e.message);
-			logger.log('error', {
-				message: e.message,
-				stack: e.stack
-			});
+			next(e);
 		}
 	}
 }

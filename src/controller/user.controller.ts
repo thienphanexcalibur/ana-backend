@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-constructor */
 import { Model, Document, Types } from 'mongoose';
 import { AppController } from '@controller';
-import { IUser } from '@entity';
+import { IUser, UserModel } from '@entity';
 
 export default class UserController extends AppController {
 	public model: Model<Document>;
@@ -11,7 +11,7 @@ export default class UserController extends AppController {
 	}
 
 	async getUser({ _id }: { _id: Types.ObjectId }): Promise<IUser> {
-		const user = (await this.model.findById(_id)) as IUser;
+		const user = (await UserModel.findById(_id)) as IUser;
 		return user;
 	}
 }
