@@ -1,15 +1,11 @@
 // Authentication Controller
-import { AppController } from '@controller';
 import { IUser, UserModel } from '@entity';
 import { generateToken, verifyToken, _hash, _hashCompare } from '@utils';
 import { NextFunction, Request, Response } from 'express';
-import { Document, Model, ObjectId } from 'mongoose';
+import { ObjectId } from 'mongoose';
 
-export default class AuthController extends AppController {
-	public model: Model<Document>;
-
-	constructor(model: Model<Document>) {
-		super(model);
+export default class AuthController {
+	constructor() {
 		this.auth = this.auth.bind(this);
 		this.signup = this.signup.bind(this);
 		this.verifyAuth = this.verifyAuth.bind(this);

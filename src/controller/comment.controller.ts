@@ -1,14 +1,9 @@
-import { logger } from '@/utils';
-import { AppController } from '@controller';
-import { CommentModel, IComment, IPost, IUser, PostModel } from '@entity';
+import { CommentModel, IComment, PostModel } from '@entity';
 import { NextFunction, Request, Response } from 'express';
-import { Document, Model } from 'mongoose';
+import { Document } from 'mongoose';
 
-export default class CommentController extends AppController {
-	public model: Model<Document>;
-
-	constructor(model: Model<Document>) {
-		super(model);
+export default class CommentController {
+	constructor() {
 		this.addComment = this.addComment.bind(this);
 		this.editComment = this.editComment.bind(this);
 		this.deleteComment = this.deleteComment.bind(this);
@@ -37,7 +32,7 @@ export default class CommentController extends AppController {
 			const { id } = req.params;
 			const { title, content } = req.body;
 			// eslint-disable-next-line max-len
-			const modifiedPost: Document = await this.modify(id, {
+			const modifiedPost: Document = await CommentModel.findByIdAndUpdate(id, {
 				title,
 				content,
 				updated_date: Date.now()
@@ -53,7 +48,7 @@ export default class CommentController extends AppController {
 	async deleteComment(req: Request, res: Response, next: NextFunction): Promise<void> {
 		const { id } = req.params;
 		try {
-			const deletedPost = (await this.remove(id)) as IPost;
+			const deletedPost = await CommentModel.findByIdAndDelete(id);
 			if (deletedPost) {
 				res.sendStatus(200);
 			} else {

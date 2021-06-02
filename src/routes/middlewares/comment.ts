@@ -1,11 +1,10 @@
 import { Router } from 'express';
 import { CommentController, AuthController } from '@controller';
-import { CommentModel, UserModel } from '@entity';
 
 const router: Router = Router();
-const commentController = new CommentController(CommentModel);
+const commentController = new CommentController();
 
-const authController = new AuthController(UserModel);
+const authController = new AuthController();
 
 router.post('/add', authController.verifyAuth, commentController.addComment);
 

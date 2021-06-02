@@ -1,7 +1,7 @@
 import { Schema, model, Model, Types, Document } from 'mongoose';
 import { PostModel } from './Post';
 
-export interface IUser extends Document {
+export interface IUser {
 	username: string;
 	password: string;
 	fullname?: string;
@@ -9,8 +9,9 @@ export interface IUser extends Document {
 	mobile?: string;
 	posts?: Schema.Types.ObjectId[];
 	token?: string;
+	avatar: URL;
 }
-const UserSchema: Schema = new Schema({
+export const UserSchema: Schema = new Schema({
 	username: {
 		type: String,
 		required: true,
@@ -23,6 +24,9 @@ const UserSchema: Schema = new Schema({
 		type: String
 	},
 	email: {
+		type: String
+	},
+	avatar: {
 		type: String
 	},
 	mobile: {

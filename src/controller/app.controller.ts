@@ -1,41 +1,19 @@
-import { IComment, IPost, IUser } from '@entity';
-import { Document, Model, Types } from 'mongoose';
-
-declare type I = IComment | IUser | IPost | IUser;
+import Minio, { Client } from 'minio';
 
 export default class AppController {
-	public model: Model<Document>;
+	public minio: Client;
 
-	constructor(model: Model<Document>) {
-		this.model = model;
-		this.find = this.find.bind(this);
-		this.add = this.add.bind(this);
-		this.modify = this.modify.bind(this);
+	constructor() {
+		this.minio = AppController.initMinioClient();
 	}
 
-	add(payload: any) {
-		const document = this.model.create(payload);
-		return document;
-	}
-
-	modify(_id: string, payload: Partial<I>): Promise<Document> {
-		return this.model.findByIdAndUpdate(_id, payload).exec();
-	}
-
-	remove(_id: string): Promise<Document> {
-		return this.model.findByIdAndRemove(_id).exec();
-	}
-
-	// eslint-disable-next-line max-len
-	find(pre?: Types.ObjectId | Partial<I>, ...args: any) {
-		if (Types.ObjectId.isValid(pre as Types.ObjectId)) {
-			return this.model.findById(pre, ...args);
-		}
-		return this.model.find(pre, ...args);
-	}
-
-	// eslint-disable-next-line class-methods-use-this
-	_Error<T>(error: T): T {
-		return error;
+	static initMinioClient(): Client {
+		return new Minio.Client({
+			endPoint: '0.0.0.0',
+			port: 9000,
+			useSSL: false,
+			accessKey: 'minioadmin',
+			secretKey: 'minioadmin'
+		});
 	}
 }

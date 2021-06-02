@@ -4,11 +4,8 @@ import { AppController } from '@controller';
 import { IPost, PostModel, UserModel } from '@entity';
 import { logger } from '@utils';
 
-export default class PostController extends AppController {
-	public model: Model<Document>;
-
-	constructor(model: Model<Document>) {
-		super(model);
+export default class PostController {
+	constructor() {
 		this.addPost = this.addPost.bind(this);
 		this.editPost = this.editPost.bind(this);
 		this.deletePost = this.deletePost.bind(this);
@@ -19,7 +16,7 @@ export default class PostController extends AppController {
 	async addPost(req: Request, res: Response, next: NextFunction): Promise<void> {
 		const { title, content, byUser }: IPost = res.locals.body;
 		try {
-			const newPost = await this.model.create({ title, content, byUser } as IPost);
+			const newPost = await PostModel.create({ title, content, byUser } as IPost);
 			// Append new post into current user
 			const foundUser = await UserModel.findById(byUser);
 			foundUser.posts.push(newPost._id);
@@ -46,11 +43,11 @@ export default class PostController extends AppController {
 		}
 	}
 
-	async editPost(req: Request, res: Response): Promise<void> {
+	async editPost(req: Request, res: Response, next: NextFunction): Promise<void> {
 		try {
 			const { id } = req.params;
 			const { title, content, byUser }: IPost = req.body;
-			const modifiedPost = (await this.modify(id, {
+			const modifiedPost = (await PostModel.findByIdAndUpdate(id, {
 				title,
 				content,
 				updated_date: Date.now(),
@@ -68,7 +65,7 @@ export default class PostController extends AppController {
 	async deletePost(req: Request, res: Response, next: NextFunction): Promise<void> {
 		const { id } = req.params;
 		try {
-			const deletedPost = (await this.remove(id)) as IPost;
+			const deletedPost = (await PostModel.findByIdAndDelete(id)) as IPost;
 			if (deletedPost) {
 				res.status(200);
 			} else {

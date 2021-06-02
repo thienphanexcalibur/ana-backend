@@ -1,17 +1,27 @@
-/* eslint-disable no-useless-constructor */
-import { Model, Document, Types } from 'mongoose';
-import { AppController } from '@controller';
-import { IUser, UserModel } from '@entity';
+import { UserModel } from '@/entity';
+import { NextFunction, Request, Response } from 'express';
+import { AppController } from '.';
 
 export default class UserController extends AppController {
-	public model: Model<Document>;
-
-	constructor(model: Model<Document>) {
-		super(model);
+	async getUser(req: Request, res: Response, next: NextFunction) {
+		const { id } = req.params;
+		try {
+			const user = await UserModel.findById(id, ['username', 'avatar', 'posts']);
+			res.send(user);
+		} catch (e) {
+			next(e);
+		}
 	}
 
-	async getUser({ _id }: { _id: Types.ObjectId }): Promise<IUser> {
-		const user = (await UserModel.findById(_id)) as IUser;
-		return user;
+	async editUser(req: Request, res: Response, next: NextFunction) {
+		try {
+			const { body } = res.locals;
+			const user = await UserModel.findByIdAndUpdate(body._id, body, {
+				new: true
+			});
+			res.send(user);
+		} catch (e) {
+			next(e);
+		}
 	}
 }

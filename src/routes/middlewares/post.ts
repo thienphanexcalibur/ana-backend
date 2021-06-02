@@ -1,13 +1,12 @@
 // Middlewares
 import { Router } from 'express';
 import { AuthController, PostController } from '@controller';
-import { PostModel, UserModel } from '@entity';
 
 const router: Router = Router();
 
-const postController = new PostController(PostModel);
+const postController = new PostController();
 
-const authController = new AuthController(UserModel);
+const authController = new AuthController();
 
 // router.use(authController.verifyAuth);
 
