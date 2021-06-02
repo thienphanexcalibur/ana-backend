@@ -6,3 +6,4 @@ node_modules
 data-db
 error.log
 combined.log
+minio
