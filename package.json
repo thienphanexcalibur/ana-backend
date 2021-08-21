@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env mode=DEVELOPMENT nodemon -e ts -r ./babelRegister.js server.ts",
-    "prod": "cross-env mode=PRODUCTION node -r ./babelRegister.js src/app.ts",
+    "dev": "cross-env mode=development nodemon -e ts -r ./babelRegister.js server.ts",
+    "prod": "cross-env mode=production node -r ./babelRegister.js src/app.ts",
     "lint": "eslint --cache --quiet ./src/**/*.ts",
     "lint:fix": "prettier-eslint --write $PWD/'src/**/*.[jt]s?(x)'",
     "debug": "cross-env mode=DEVELOPMENT nodemon -e ts -r ./babelRegister.js --inspect=0.0.0.0:9230 server.ts",
@@ -58,8 +58,11 @@
     "winston-mongodb": "^5.0.1"
   },
   "dependencies": {
+    "@types/url-parse": "^1.4.3",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "minio": "^7.0.18"
+    "minio": "^7.0.18",
+    "multer": "^1.4.2",
+    "url-parse": "^1.5.1"
   }
 }

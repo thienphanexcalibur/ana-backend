@@ -9,7 +9,7 @@ export interface IUser {
 	mobile?: string;
 	posts?: Schema.Types.ObjectId[];
 	token?: string;
-	avatar: URL;
+	avatar: string;
 }
 export const UserSchema: Schema = new Schema({
 	username: {
@@ -21,6 +21,9 @@ export const UserSchema: Schema = new Schema({
 		type: String
 	},
 	fullname: {
+		type: String
+	},
+	bio: {
 		type: String
 	},
 	email: {

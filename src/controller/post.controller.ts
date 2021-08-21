@@ -1,11 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { Model, Document } from 'mongoose';
-import { AppController } from '@controller';
 import { IPost, PostModel, UserModel } from '@entity';
-import { logger } from '@utils';
+import Controller from './controller';
 
-export default class PostController {
+export default class PostController extends Controller {
 	constructor() {
+		super();
 		this.addPost = this.addPost.bind(this);
 		this.editPost = this.editPost.bind(this);
 		this.deletePost = this.deletePost.bind(this);
@@ -36,7 +35,10 @@ export default class PostController {
 				.sort({
 					created_date: -1
 				});
-			res.send(posts);
+			res.send({
+				message: '',
+				data: posts
+			});
 			next();
 		} catch (e) {
 			next(e);
@@ -45,17 +47,41 @@ export default class PostController {
 
 	async editPost(req: Request, res: Response, next: NextFunction): Promise<void> {
 		try {
-			const { id } = req.params;
-			const { title, content, byUser }: IPost = req.body;
-			const modifiedPost = (await PostModel.findByIdAndUpdate(id, {
-				title,
-				content,
-				updated_date: Date.now(),
-				byUser
-			})) as IPost;
+			const { id: postId } = req.params;
+			const { authId, body } = res.locals;
+			const { title, content, thumbnail }: IPost = body;
+			const { file } = req;
 
-			if (modifiedPost) {
-				res.send(modifiedPost);
+			let thumbnailUrl = thumbnail;
+
+			const post = await PostModel.findById(postId, 'byUser');
+
+			if (authId === post.byUser.toString()) {
+				if (file) {
+					const url = await this.putStatic('thumbnails', file.originalname, file.buffer);
+					thumbnailUrl = url;
+				}
+
+				const result = (await post.update(
+					{
+						title,
+						content,
+						thumbnail: thumbnailUrl
+					},
+					{
+						omitUndefined: true,
+						new: true,
+						timestamps: true
+					}
+				)) as mongodb.BulkWriteResult;
+
+				if (result.ok) {
+					res.send('Success');
+				}
+			} else {
+				res.status(401).send({
+					message: 'Not Authorized'
+				});
 			}
 		} catch (e) {
 			next(e);
@@ -82,10 +108,11 @@ export default class PostController {
 		const { id } = req.params;
 		try {
 			const post = await PostModel.findById(id, '-comments');
+			post.thumbnail = await this.getStatic(post.thumbnail);
 			if (post) {
 				res.send(post);
 			} else {
-				res.sendStatus(404).send({
+				res.status(404).send({
 					message: 'Post does not exist'
 				});
 			}

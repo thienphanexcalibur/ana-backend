@@ -1,18 +1,15 @@
-import {
-	Express,
-	Errback,
-	Request,
-	Response,
-	NextFunction,
-	urlencoded,
-	json,
-	request
-} from 'express';
+import { Express, Request, Response, NextFunction, urlencoded, json } from 'express';
 
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { logger } from '@utils';
-import { AuthMiddleware, PostMiddleware, CommentMiddleware, PostsMiddleware } from './middlewares';
+import {
+	AuthMiddleware,
+	PostMiddleware,
+	CommentMiddleware,
+	PostsMiddleware,
+	StaticMiddleware
+} from './middlewares';
 
 function routes(app: Express): void {
 	app.use(
@@ -35,9 +32,11 @@ function routes(app: Express): void {
 	app.use('/post', PostMiddleware);
 	app.use('/posts', PostsMiddleware);
 	app.use('/comment', CommentMiddleware);
+	app.use('/static', StaticMiddleware);
 	app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 		res.status(500).send({
-			message: err.message
+			message: err.message,
+			stack: err.stack
 		});
 		logger.log('error', {
 			message: err.message,
